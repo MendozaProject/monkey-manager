@@ -10,3 +10,4 @@ class Project:
         self.tasks = []
         self.categories = []
 
+    
