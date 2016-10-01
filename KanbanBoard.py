@@ -31,4 +31,3 @@ class Kanban(App):
 
 if __name__ == "__main__":
     Kanban().run()
-
