@@ -10,6 +10,3 @@ class Project:
         self.tasks = []
         self.categories = []
 
-    def edit_Project(self, new_name, new_description):
-        self.name = new_name
-        self.description = new_description
