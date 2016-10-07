@@ -20,10 +20,15 @@ class ProjectUtils(type):
     @classmethod
     def find_project_by_name(self, name):
         i = 0
+        found = False
         for project in self.projects:
             if project.name == name:
-                return i
-        return -1
+                found = True
+                break
+            i += 1
+        
+        if found: return i
+        else: return -1
 
     @classmethod
     def add_project(self, new_project):

@@ -4,6 +4,7 @@ from ProjectUtils import ProjectUtils
 # ######################################################################
 # Last updated by Angelo on October 6
 
+RESERVED_WORDS = ["exit", "help", "list", "new", "delete", "edit", "open"]
 
 def manager():
     print "________________________________________________________________"
@@ -11,6 +12,7 @@ def manager():
 
     while True:
         command = raw_input('\nMain--> ')
+        command = command.strip()
         if command == 'exit' or command == 'x':
             break
         elif command == 'help' or command == 'h':
@@ -23,13 +25,13 @@ def manager():
             delete_project()
         elif command == 'edit' or command == 'e':
             edit_project()
-        elif ProjectUtils.find_project_by_name(command) != -1:
+        elif not ProjectUtils.find_project_by_name(command) == -1:
             index = ProjectUtils.find_project_by_name(command)
             view_project(index)
         elif command == 'clear':
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
         else:
             print "\nCommand or Project not recognized"
             
@@ -57,24 +59,34 @@ def new_project():
     
     while True:
         name = raw_input ("Project Name:  ")
+        name = name.strip()
         if name == 'cancel':
             return
-        if ProjectUtils.find_project_by_name(name) == -1 and not name == "":
-            break
+        if not ProjectUtils.find_project_by_name(name) == -1:
+            print "\nProject named '" + name + "' is already taken\n"
+        elif len(name) < 2:
+            print "\nProject name must at least 2 character\n"
+        elif not is_reserved_word(name):
+            print "\nProject name cannot be a reserved word\n"
         else:
-            print("Name cannot be blank or already taken")
+            break
 
     while description == "":
         description = raw_input ("\nDescription:   ")
+        description = description.strip()
         if name == 'cancel':
             return
         
     ProjectUtils.add_project(Project(name, description))
     
-    print "\n  Success, your new project '" + name + "' has been created!"
+    print "\n  Success! Your new project '" + name + "' has been created!"
     
 
 def list_projects():
+    if not ProjectUtils.projects:
+        print "\nError: Project List is empty"
+        return
+
     print "________________________________________________________________"
     print "  PROJECTS LIST\n"
     
@@ -85,10 +97,15 @@ def list_projects():
 
 
 def delete_project():
+    if not ProjectUtils.projects:
+        print "\nError: Project List is empty"
+        return
+
     print "________________________________________________________________"
     print "  DELETE PROJECT (Type 'cancel' to cancel)\n"
     while True:
         name = raw_input("Project Name:  ")
+        name = name.strip()
         
         if name == 'cancel':
             return
@@ -107,36 +124,63 @@ def view_project(index):
     print "________________________________________________________________"
     print "  " + ProjectUtils.projects[index].name
     print "\n  Date Created:  " + str(ProjectUtils.projects[index].created_date)
-    print "\n  Description:   " + ProjectUtils.projects[index].description
+    print "\n  Description:   " + str(ProjectUtils.projects[index].description)
 
 
 def edit_project():
+    if not ProjectUtils.projects:
+        print "\nError: Project List is empty"
+        return
+
     print "________________________________________________________________"
     print "  Edit PROJECT (Type 'cancel' to cancel)\n"
 
     while True:
-        name = raw_input("Project Name:  ")
-
+        name = raw_input("Project Name:     ")
+        name = name.strip()
         if name == 'cancel':
             return
 
         index = ProjectUtils.find_project_by_name(name)
 
         if index == -1:
-            print "Project named '" + name + "' not found"
+            print "\nProject named '" + name + "' not found\n"
         else:
-            # Loops
+            break
+            
+    while True:
+        new_name = raw_input("\nNew Project Name: ")
+        new_name = new_name.strip()
+        if new_name == 'cancel':
+            return
+        if not ProjectUtils.find_project_by_name(new_name) == -1:
+            print "\nProject named '" + new_name + "' is already taken"
+        elif len(new_name) < 2:
+            print "\nProject name must be at least 2 characters"
+        elif not is_reserved_word(new_name):
+            print "\nProject name cannot be a reserved word"
+        else:
+            break
 
-            name = raw_input("New Project Name:  ")
-            if name == 'cancel':
-                break
-            else:
-                ProjectUtils.projects[index].name = name
+    while True:
+        new_description = raw_input("\nNew Description:  ")
+        new_description = new_description.strip()
+        if new_description == 'cancel':
+            return
+        else:
+            break
+        
+    ProjectUtils.projects[index].name = new_name
+    ProjectUtils.projects[index].description = new_description
 
-            description = raw_input("New Description")
+    print "\n  Success! '" + name + "' ---> '" + new_name + "'"
 
 
-
+def is_reserved_word(name):
+    for word in RESERVED_WORDS:
+        if word == name:
+            return False
+    return True
 
 if __name__ == '__main__': manager()
 
