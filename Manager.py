@@ -1,16 +1,20 @@
+import json
+import os
 from Project import Project
 from ProjectUtils import ProjectUtils
 
+
 # ######################################################################
-# Last updated by Angelo on October 6
+# Last updated by Mike on October 9
 
 RESERVED_WORDS = ["exit", "help", "list", "new", "delete", "edit", "open"]
 
 def manager():
     print "________________________________________________________________"
     print "  MONKEY MANAGER (For commands list, type 'help')"
-
+    ProjectUtils.load_projects() #loads existing projects
     while True:
+
         command = raw_input('\nMain--> ')
         command = command.strip()
         if command == 'exit' or command == 'x':
@@ -76,7 +80,7 @@ def new_project():
         description = description.strip()
         if name == 'cancel':
             return
-        
+
     ProjectUtils.add_project(Project(name, description))
     
     print "\n  Success! Your new project '" + name + "' has been created!"
@@ -169,7 +173,15 @@ def edit_project():
             return
         else:
             break
-        
+
+    #Renames and updates existing project .json file
+    with open(name + '.json', 'r') as f:
+        projectfiledata=json.load(f)
+        projectfiledata["Description"]=new_description
+    with open(name + '.json', 'w') as f:
+        json.dump(projectfiledata, f)
+        f.close()
+    os.rename(name + '.json', new_name + '.json')
     ProjectUtils.projects[index].name = new_name
     ProjectUtils.projects[index].description = new_description
 
