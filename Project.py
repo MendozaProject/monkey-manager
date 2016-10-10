@@ -10,5 +10,3 @@ class Project:
         self.description = description
         self.tasks = []
         self.categories = []
-
-    
