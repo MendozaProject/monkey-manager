@@ -8,8 +8,13 @@ import json
 import os
 from Project import Project
 
+# Last updated by Angelo on October 6
+from Project import Project
+
+
 class ProjectUtils(type):
     projects = []
+    opened_project = Project()
 
     # Makes sure there is only one instance of Project Manager (Singleton)
     _instances = {}
