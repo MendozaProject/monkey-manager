@@ -11,6 +11,8 @@ class ProjectUtils(type):
     projects = []
     opened_project = Project()
 
+    RESERVED_WORDS = ["exit", "help", "list", "new", "delete", "edit", "open", "back"]
+
     # Makes sure there is only one instance of Project Manager (Singleton)
     _instances = {}
 
@@ -40,6 +42,12 @@ class ProjectUtils(type):
     def remove_project(self, index):
         del self.projects[index]
 
+    @classmethod
+    def is_reserved_word(self, name):
+        for word in self.RESERVED_WORDS:
+            if word == name:
+                return False
+        return True
 
 # Metaclass, Do not touch!
 class MyClass(object):
