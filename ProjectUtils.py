@@ -8,9 +8,6 @@ import json
 import os
 from Project import Project
 
-# Last updated by Angelo on October 6
-from Project import Project
-
 class ProjectUtils(type):
     projects = []
     opened_project = Project()
@@ -76,7 +73,6 @@ class ProjectUtils(type):
             if word == name:
                 return False
         return True
-
 
 # Metaclass, Do not touch!
 class MyClass(object):
