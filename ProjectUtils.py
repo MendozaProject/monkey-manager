@@ -78,7 +78,6 @@ class ProjectUtils(type):
                 return False
         return True
 
-
 # Metaclass, Do not touch!
 class MyClass(object):
     __metaclass__ = ProjectUtils

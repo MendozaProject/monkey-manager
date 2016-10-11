@@ -7,6 +7,9 @@ from ProjectUtils import ProjectUtils
 from Project import Project
 import OpenedProject
 
+from ProjectUtils import ProjectUtils
+from Project import Project
+import OpenedProject
 # ######################################################################
 # Last updated by Mike on October 9
 
@@ -176,6 +179,7 @@ def edit_project():
             return
         else:
             break
+
 
     #Renames and updates existing project .json file
     with open(name + '.json', 'r') as f:
