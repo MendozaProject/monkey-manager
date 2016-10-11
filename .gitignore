@@ -12,6 +12,7 @@ Kivy-*.dist-info
 *.DS_Store
 *.kpf
 *xml
+*.json
 build/*
 doc/build
 doc/autobuild.py-done*
