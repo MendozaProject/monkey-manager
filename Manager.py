@@ -1,17 +1,11 @@
 import json
 import os
+import OpenedProject
 from Project import Project
 from ProjectUtils import ProjectUtils
 
-from ProjectUtils import ProjectUtils
-from Project import Project
-import OpenedProject
-
-from ProjectUtils import ProjectUtils
-from Project import Project
-import OpenedProject
 # ######################################################################
-# Last updated by Mike on October 9
+# Last updated by Angelo on October 10
 
 
 def manager():

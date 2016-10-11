@@ -3,12 +3,9 @@
 # Make sure to use its methods when manipulating the projects list
 #       ProjectManager.<method call>
 #
-# Last updated by Mike on October 9
+# Last updated by Angelo on October 10
 import json
 import os
-from Project import Project
-
-# Last updated by Angelo on October 6
 from Project import Project
 
 
