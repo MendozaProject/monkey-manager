@@ -30,3 +30,4 @@ class Project:
 
     def add_task(self, new_task):
         self.tasks.append(new_task)
+
