@@ -31,13 +31,13 @@ class Project {
         void add_task(Task new_task);
         
         // setter functions
-        void set_created_date(string created_date);
+        void set_created_date(Date created_date);
         void set_name(string name);
         void set_description(string description);
         void set_tasks(vector<Task> tasks);
         
         // getter functions
-        string get_created_date();
+        Date get_created_date();
         string get_name();
         string get_description();
         vector<Task> get_tasks();
