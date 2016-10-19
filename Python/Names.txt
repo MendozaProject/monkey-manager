@@ -1,9 +1,0 @@
-/* add names here */
-Greg
-Angelo
-Brittany
-Mike
-Nick
-Jesus
-Shane
-Ben
