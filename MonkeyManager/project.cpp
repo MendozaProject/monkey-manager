@@ -75,4 +75,3 @@ string Project::get_description(){
 vector<Task> Project::get_tasks(){
     return m_tasks;
 }
-
