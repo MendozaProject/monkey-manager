@@ -6,7 +6,7 @@
 class ProjectUtils {
 private:
     vector<Project> s_projects;
-    vector<Project> s_projects_iterator;
+    vector<Project>::iterator s_projects_iterator;
     Project s_open_project;
 
 public:
