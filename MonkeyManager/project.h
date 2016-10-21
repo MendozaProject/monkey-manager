@@ -1,5 +1,6 @@
 #ifndef PROJECT_H
 #define PROJECT_H
+#pragma once
 
 #include <string>
 #include <vector>

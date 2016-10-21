@@ -48,3 +48,11 @@ void ProjectUtils::open_project(string name){
 Project ProjectUtils::get_open_project(){
     return s_open_project;
 }
+
+void ProjectUtils::set_projects(vector<Project> projects){
+
+}
+
+vector<Project> ProjectUtils::get_projects(){
+    return s_projects;
+}

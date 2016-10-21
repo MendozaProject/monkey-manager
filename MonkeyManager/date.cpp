@@ -3,6 +3,10 @@
 Date::Date(){
 }
 
+Date::~Date(){
+
+}
+
 void Date::set_current_datetime(){
     time_t currentTime;
     struct tm *localTime;

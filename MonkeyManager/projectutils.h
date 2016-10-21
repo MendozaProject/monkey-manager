@@ -1,5 +1,6 @@
 #ifndef PROJECTUTILS_H
 #define PROJECTUTILS_H
+#pragma once
 
 #include "project.h"
 
