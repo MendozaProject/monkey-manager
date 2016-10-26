@@ -26,4 +26,5 @@ HEADERS  += mainwindow.h \
     date.h \
     projectutils.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    task.ui
