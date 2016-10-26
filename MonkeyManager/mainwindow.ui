@@ -120,10 +120,10 @@
        <bool>false</bool>
       </property>
       <property name="autoFillBackground">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">border:none;</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -1203,10 +1203,8 @@ margin-right:4px;</string>
       <property name="styleSheet">
        <string notr="true">background:rgb(255, 255, 255);</string>
       </property>
-      <widget class="QWidget" name="stackedWidgetPage1" native="true">
-       <zorder>projectsList</zorder>
-      </widget>
-      <widget class="QWidget" name="stackedWidgetPage2" native="true"/>
+      <widget class="QWidget" name="stackedWidgetPage1"/>
+      <widget class="QWidget" name="stackedWidgetPage2"/>
      </widget>
     </item>
    </layout>
