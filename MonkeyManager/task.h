@@ -2,7 +2,7 @@
 #define TASK_H
 #pragma once
 
-#include <string>
+//#include <string>
 
 #include "date.h"
 
@@ -16,10 +16,11 @@ class Task {
         string m_description;
         int   m_id;
         int    m_status;
+        int m_task_number;
 
-    public:
+    public slots:
         Task();
-        Task(string name);
+        Task(string name, int task_number, Date due_date);
         ~Task();
 
         void set_name(string name);

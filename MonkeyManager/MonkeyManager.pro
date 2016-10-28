@@ -17,14 +17,19 @@ SOURCES += main.cpp\
     project.cpp \
     task.cpp \
     date.cpp \
-    projectutils.cpp
+    projectutils.cpp \
+    taskwidget.cpp \
+    taskdialog.cpp
 
 HEADERS  += mainwindow.h \
     project.h \
     task.h \
     constants.h \
     date.h \
-    projectutils.h
+    projectutils.h \
+    taskwidget.h \
+    taskdialog.h
 
 FORMS    += mainwindow.ui \
-    task.ui
+    taskwidget.ui \
+    taskdialog.ui

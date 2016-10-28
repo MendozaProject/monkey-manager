@@ -1,28 +1,22 @@
 #include "task.h"
-#include "ui_task.h"
+//#include <time.h>
 
-Task::Task(QWidget *parent){
+Task::Task(){
     m_name = "New Name";
     m_due_date = Date();
-    m_due_date.set_current_datetime();
-
-    QTask(parent),
-        ui(new Ui::Task)
-        {
-            ui->setupUi(this);
-        }
+    m_created_date.set_current_datetime();
 }
 
-Task::Task(string name)
+Task::Task(string name, int task_number, Date due_date)
 {
     m_name = name;
-    m_due_date = Date();
-    m_due_dat.set_currnet_datetime();
+    m_due_date = due_date;
+    m_created_date.set_current_datetime();
+    m_task_number = task_number;
 }
 
 Task::~Task()
 {
-    delete ui;
 }
 
 void Task::set_name(string name)
