@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -17,8 +18,12 @@ public:
     ~MainWindow();
     void centerAndResize();
 
+private slots:
+    void onNewProjectButtonClick();
+
 private:
     Ui::MainWindow *ui;
+    QPushButton *newProjectButton;
 };
 
 #endif // MAINWINDOW_H

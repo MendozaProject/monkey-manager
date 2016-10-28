@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->centerAndResize();
+    newProjectButton = ui->newProjectButton;
+
+    //Connections
+    connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
 }
 
 void MainWindow::centerAndResize() {
@@ -35,4 +39,9 @@ void MainWindow::centerAndResize() {
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::onNewProjectButtonClick()
+{
+    qDebug() << "Button Clicked" << endl;
 }
