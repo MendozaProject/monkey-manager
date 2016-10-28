@@ -35,13 +35,28 @@ void Task::set_due_date(Date due_date)
     m_due_date = due_date;
 }
 
+/*
+ Set as the date from when it is created.
+   NO USER INPUT
+ */
+void Task::set_created_date(Date create)
+{
+    m_created_date = created_date;
+}
+
 void Task::set_description(string description)
 {
     m_description = description;
 }
 
-void Task::set_id(string id)
+/*
+ Creates a unique id for each task.
+ Based it off of the millisecond at the time of creation.
+    NO USER INPUT
+ */
+void Task::set_id()
 {
+    //id = time;
     m_id = id;
 }
 
@@ -57,12 +72,12 @@ string Task::get_name()
 
 Date Task::get_due_date()
 {
-    return m_created_date;
+    return m_due_date;
 }
 
 Date Task::get_created_date()
 {
-    return m_due_date;
+    return m_created_date;
 }
 
 string Task::get_description()

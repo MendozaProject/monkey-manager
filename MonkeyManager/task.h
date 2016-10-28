@@ -14,7 +14,7 @@ class Task {
         Date m_due_date;
         Date m_created_date;
         string m_description;
-        long   m_id;
+        int   m_id;
         int    m_status;
 
     public:
@@ -24,8 +24,9 @@ class Task {
 
         void set_name(string name);
         void set_due_date(Date due_date);
+        void set_created_date();
         void set_description(string description);
-        void set_id(string id);
+        void set_id();
         void set_status(int status);
 
         string get_name();
