@@ -5,8 +5,6 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QListView>
-#include <QStringList>
-#include <QStringListModel>
 
 namespace Ui {
 class MainWindow;
@@ -28,8 +26,6 @@ private:
     Ui::MainWindow *ui;
     QPushButton *newProjectButton;
     QListView *projectListView;
-    QStringList list;
-    QStringListModel *model;
 
 };
 

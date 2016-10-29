@@ -24,6 +24,7 @@ HEADERS  += mainwindow.h \
     task.h \
     constants.h \
     date.h \
-    projectutils.h
+    projectutils.h \
+    projectlistmodel.h
 
 FORMS    += mainwindow.ui

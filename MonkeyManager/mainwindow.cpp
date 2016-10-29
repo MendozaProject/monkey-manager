@@ -11,9 +11,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
     projectListView = ui->projectsList;
-    model = new QStringListModel(projectListView);
-    model->setStringList(list);
-    projectListView->setModel(model);
 
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
@@ -48,6 +45,4 @@ MainWindow::~MainWindow()
 void MainWindow::onNewProjectButtonClick()
 {
     qDebug() << "Button";
-    list.append("Project");
-    model->setStringList(list);
 }
