@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QListView>
+#include "projectlistmodel.h"
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +27,8 @@ private:
     Ui::MainWindow *ui;
     QPushButton *newProjectButton;
     QListView *projectListView;
+    ProjectListModel *projectModel;
+    vector<Project*> projectList;
 
 };
 

@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     project.cpp \
     task.cpp \
     date.cpp \
-    projectutils.cpp
+    projectutils.cpp \
+    projectlistmodel.cpp
 
 HEADERS  += mainwindow.h \
     project.h \

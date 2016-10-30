@@ -1,25 +1,21 @@
 #ifndef PROJECTLISTMODEL_H
 #define PROJECTLISTMODEL_H
-
-#include <QStringList>
 #include <QAbstractListModel>
-#include <QVariant>
-
-using namespace std;
+#include <vector>
+#include "project.h"
 
 class ProjectListModel : public QAbstractListModel{
     Q_OBJECT
 public:
-    //temp values are strings while making sure code works
-    ProjectListModel(const QStringList &strings, QObject *parent = 0):
-        QAbstractListModel(parent), stringList(strings){}
+    explicit ProjectListModel(const vector<Project*>& projects, QObject* parent = 0)
+        :QAbstractListModel(parent), projectsList(projects){}
+
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation,
-                        int role = Qt::DisplayRole) const;
-
+                             int role = Qt::DisplayRole) const;
 private:
-    QStringList stringList;
+    vector<Project*> projectsList;
 };
 
 #endif // PROJECTLISTMODEL_H
