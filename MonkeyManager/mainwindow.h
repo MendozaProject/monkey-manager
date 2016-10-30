@@ -28,7 +28,7 @@ private:
     QPushButton *newProjectButton;
     QListView *projectListView;
     ProjectListModel *projectModel;
-    vector<Project*> projectList;
+    vector<Project*> projectVector;
 
 };
 

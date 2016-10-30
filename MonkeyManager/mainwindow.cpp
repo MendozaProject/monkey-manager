@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
     projectListView = ui->projectsList;
+    projectModel = new ProjectListModel(projectVector);
+    projectListView->setModel(projectModel);
 
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
