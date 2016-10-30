@@ -56,4 +56,5 @@ void MainWindow::onNewProjectButtonClick()
 void MainWindow::onDeleteProjectButtonClick()
 {
     qDebug() << "Delete Project Button";
+    projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
 }

@@ -38,3 +38,15 @@ bool ProjectListModel::addProject(Project* &value, int role){
     }
     return false;
 }
+
+bool ProjectListModel::deleteProject(QModelIndex &index, int role){
+    if(index.isValid() && role == Qt::EditRole){
+        projectsList.erase(projectsList.begin() + index.row());
+
+        QModelIndex topLeft = QAbstractItemModel::createIndex(0,0);
+        QModelIndex bottomRight = QAbstractItemModel::createIndex((rowCount() - 1), 1);
+        emit dataChanged(topLeft, bottomRight);
+        return true;
+    }
+    return false;
+}

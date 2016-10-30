@@ -15,6 +15,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation,
                              int role = Qt::DisplayRole) const;
     bool addProject(Project* &value, int role = Qt::EditRole);
+    bool deleteProject(QModelIndex &index, int role = Qt::EditRole);
 private:
     vector<Project*> projectsList;
 };
