@@ -27,3 +27,14 @@ QVariant ProjectListModel::headerData(int section, Qt::Orientation orientation,
      else
          return QString("Row %1").arg(section);
  }
+bool ProjectListModel::addProject(Project* &value, int role){
+    if(role == Qt::EditRole){
+        projectsList.push_back(value);
+
+        QModelIndex topLeft = QAbstractItemModel::createIndex(0,0);
+        QModelIndex bottomRight = QAbstractItemModel::createIndex((rowCount() - 1), 1);
+        emit dataChanged(topLeft, bottomRight);
+        return true;
+    }
+    return false;
+}

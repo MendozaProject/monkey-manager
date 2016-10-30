@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
     projectListView = ui->projectsList;
+    projectVector.push_back(new Project("test", "test"));//remove this line
     projectModel = new ProjectListModel(projectVector);
     projectListView->setModel(projectModel);
 
@@ -47,4 +48,6 @@ MainWindow::~MainWindow()
 void MainWindow::onNewProjectButtonClick()
 {
     qDebug() << "Button";
+    Project* newProject = new Project("New Project", "");
+    projectModel->addProject(newProject, Qt::EditRole);
 }
