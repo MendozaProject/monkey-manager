@@ -10,13 +10,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
+    deleteProjectButton= ui->deleteProjectButton;
     projectListView = ui->projectsList;
-    projectVector.push_back(new Project("test", "test"));//remove this line
     projectModel = new ProjectListModel(projectVector);
     projectListView->setModel(projectModel);
 
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
+    connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
 }
 
 void MainWindow::centerAndResize() {
@@ -47,7 +48,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::onNewProjectButtonClick()
 {
-    qDebug() << "Button";
+    qDebug() << "New Project Button";
     Project* newProject = new Project("New Project", "");
     projectModel->addProject(newProject, Qt::EditRole);
+}
+
+void MainWindow::onDeleteProjectButtonClick()
+{
+    qDebug() << "Delete Project Button";
 }

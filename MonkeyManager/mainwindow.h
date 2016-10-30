@@ -22,10 +22,12 @@ public:
 
 private slots:
     void onNewProjectButtonClick();
+    void onDeleteProjectButtonClick();
 
 private:
     Ui::MainWindow *ui;
     QPushButton *newProjectButton;
+    QPushButton *deleteProjectButton;
     QListView *projectListView;
     ProjectListModel *projectModel;
     vector<Project*> projectVector;
