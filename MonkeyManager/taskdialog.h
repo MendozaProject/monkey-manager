@@ -17,6 +17,9 @@ public:
     explicit TaskDialog(QWidget *parent = 0);
     ~TaskDialog();
 
+private slots:
+    void on_buttonBox_accepted();
+
 private:
     Task m_task;
     Ui::TaskDialog *ui;

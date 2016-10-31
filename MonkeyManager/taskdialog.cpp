@@ -12,3 +12,12 @@ TaskDialog::~TaskDialog()
 {
     delete ui;
 }
+
+void TaskDialog::on_buttonBox_accepted()
+{
+    //set name
+
+    //set description
+    //set date
+    //set status
+}
