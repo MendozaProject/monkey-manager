@@ -1,19 +1,25 @@
 #include "task.h"
 //#include <time.h>
 
-Task::Task(){
-    m_name = "New Name";
+Task::Task()
+{
     m_due_date = Date();
     m_created_date.set_current_datetime();
 }
 
 Task::Task(int task_number)
 {
+<<<<<<< HEAD
     m_name = "New Task";
     m_description = "Type description here";
+=======
+    m_name = "New Name";
+    m_descripion = "Add description here.";
+>>>>>>> 134742c65a8ae0ed8f7990966d2101bccd71b9de
     m_due_date.set_current_datetime();
     m_created_date.set_current_datetime();
     m_task_number = task_number;
+    m_id.set_current_datetime();
 }
 
 Task::~Task()
@@ -44,6 +50,7 @@ void Task::set_description(string description)
     m_description = description;
 }
 
+<<<<<<< HEAD
 /*
  Creates a unique id for each task.
  Based it off of the millisecond at the time of creation.
@@ -55,6 +62,8 @@ void Task::set_id(int id)
     m_id = id;
 }
 
+=======
+>>>>>>> 134742c65a8ae0ed8f7990966d2101bccd71b9de
 void Task::set_status(int status)
 {
     m_status = status;

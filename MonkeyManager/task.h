@@ -27,7 +27,6 @@ class Task {
         void set_due_date(Date due_date);
         void set_created_date(Date created_date);
         void set_description(string description);
-        void set_id(int id);
         void set_status(int status);
 
         string get_name();
