@@ -19,7 +19,7 @@ Project::~Project(){
 // task management functions
 Task Project::find_task_by_name(string name){
     bool found = false;
-    Task task;
+    Task task = Task();
     for (m_tasks_iterator = m_tasks.begin(); m_tasks_iterator != m_tasks.end(); m_tasks_iterator++){
         if ((*m_tasks_iterator).get_name() == name){
             found = true;

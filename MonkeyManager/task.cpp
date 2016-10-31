@@ -7,10 +7,11 @@ Task::Task(){
     m_created_date.set_current_datetime();
 }
 
-Task::Task(string name, int task_number, Date due_date)
+Task::Task(int task_number)
 {
-    m_name = name;
-    m_due_date = due_date;
+    m_name = "New Task";
+    m_description = "Type description here";
+    m_due_date.set_current_datetime();
     m_created_date.set_current_datetime();
     m_task_number = task_number;
 }
@@ -33,7 +34,7 @@ void Task::set_due_date(Date due_date)
  Set as the date from when it is created.
    NO USER INPUT
  */
-void Task::set_created_date(Date create)
+void Task::set_created_date(Date created_date)
 {
     m_created_date = created_date;
 }
@@ -48,7 +49,7 @@ void Task::set_description(string description)
  Based it off of the millisecond at the time of creation.
     NO USER INPUT
  */
-void Task::set_id()
+void Task::set_id(int id)
 {
     //id = time;
     m_id = id;

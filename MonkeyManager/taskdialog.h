@@ -1,25 +1,25 @@
 #ifndef TASKDIALOG_H
 #define TASKDIALOG_H
+#pragma once
 
 #include <QDialog>
 #include "task.h"
 
 namespace Ui {
-class taskdialog;
+class TaskDialog;
 }
 
-class taskdialog : public QDialog, public Task
+class TaskDialog : public QDialog
 {
     Q_OBJECT
 
-
 public:
-    explicit taskdialog(QWidget *parent = 0);
-    ~taskdialog();
+    explicit TaskDialog(QWidget *parent = 0);
+    ~TaskDialog();
 
 private:
     Task m_task;
-    Ui::taskdialog *ui;
+    Ui::TaskDialog *ui;
 };
 
 #endif // taskdialog_H
