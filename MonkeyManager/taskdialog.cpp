@@ -15,9 +15,6 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::on_buttonBox_accepted()
 {
-    //set name
-
-    //set description
-    //set date
-    //set status
+    m_task.set_name(ut->lineEdit);
 }
+

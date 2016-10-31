@@ -14,7 +14,7 @@ Task::Task(int task_number)
     m_due_date.set_current_datetime();
     m_created_date.set_current_datetime();
     m_task_number = task_number;
-    m_id.set_current_datetime();
+    //m_id.set_current_datetime();
 }
 
 Task::~Task()
