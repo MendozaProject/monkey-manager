@@ -20,14 +20,13 @@ class Task {
 
     public slots:
         Task();
-        Task(string name, int task_number, Date due_date);
+        Task(int task_number);
         ~Task();
 
         void set_name(string name);
         void set_due_date(Date due_date);
         void set_created_date();
         void set_description(string description);
-        void set_id();
         void set_status(int status);
 
         string get_name();
