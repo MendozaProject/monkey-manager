@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     date.cpp \
     projectutils.cpp \
     taskwidget.cpp \
-    taskdialog.cpp
+    taskdialog.cpp \
+    projectlistmodel.cpp
 
 HEADERS  += mainwindow.h \
     project.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     date.h \
     projectutils.h \
     taskwidget.h \
-    taskdialog.h
+    taskdialog.h \
+    projectlistmodel.h
 
 FORMS    += mainwindow.ui \
     taskwidget.ui \

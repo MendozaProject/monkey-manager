@@ -15,6 +15,6 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::on_buttonBox_accepted()
 {
-    m_task.set_name(ut->lineEdit);
+    m_task.set_name(ui->lineEdit->text().toStdString());
 }
 

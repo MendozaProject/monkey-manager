@@ -20,9 +20,9 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
-    void on_lineEdit_editingFinished();
+    //void on_lineEdit_editingFinished();
 
-    void on_dateEdit_userDateChanged(const QDate &date);
+    //void on_dateEdit_userDateChanged(const QDate &date);
 
 private:
     Task m_task;
