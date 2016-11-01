@@ -265,7 +265,7 @@ color:rgb(117, 117, 117);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="newProjectButton">
          <property name="styleSheet">
           <string notr="true">border:none;
 color:rgb(236, 77, 37);

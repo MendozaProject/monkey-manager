@@ -17,14 +17,16 @@ SOURCES += main.cpp\
     project.cpp \
     task.cpp \
     date.cpp \
-    projectutils.cpp
+    projectutils.cpp \
+    projectlistmodel.cpp
 
 HEADERS  += mainwindow.h \
     project.h \
     task.h \
     constants.h \
     date.h \
-    projectutils.h
+    projectutils.h \
+    projectlistmodel.h
 
 FORMS    += mainwindow.ui \
     task.ui
