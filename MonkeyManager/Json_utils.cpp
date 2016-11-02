@@ -2,6 +2,8 @@
 Need edit functions
 
 */
+
+
 #include "date.h"
 #include "project.h"
 #include "task.h"
@@ -26,7 +28,7 @@ void remove_json_project(string projectName)
 	string filename = projectName + ".json";
     remove(filename.c_str());
 }
-void create_json_project(Project newproject) 
+void create_json_project(Project newproject) //need function in Project or Task for Task number
 {
 	int number_task = 0;
 	string name_task = "task";
@@ -47,6 +49,7 @@ void create_json_project(Project newproject)
 		{"Project",{
 			{"Name", newproject.get_name() },
 			{"Description", newproject.get_description() },
+			{"Task Number", 0},
 			{ "Created Date",{
 				{ "Day",day },
 				{ "Month",month },
@@ -60,7 +63,7 @@ void create_json_project(Project newproject)
 		} }
 	  };
 
-	for (int i = 0; i < task_size; i++)
+	for (int i = 0; i < task_size; i++)//use m_task_number for number_task once function is made
 	{
 		number_task += 1;
 		name_task += to_string(number_task);
@@ -79,8 +82,8 @@ void create_json_project(Project newproject)
 		int minute2 = task_date.MINUTE;
 		int second2 = task_date.SECOND;
 
-
-		j1["Tasks"][number_task] = {
+	    
+		j1["Tasks"][name_task] = {
 		{ "Name", project_tasks[i].get_name() },
 		{ "Due Date",{
 			{"Day",day},
@@ -112,27 +115,33 @@ void create_json_project(Project newproject)
 
 	
 }
-void remove_json_task(Project project, Task taskRemove)
+void remove_json_task(Project project, Task taskRemove)//need to chnage once m_task_number function is made
 {
 	string taskName = taskRemove.get_name();
 	string task_name = "task";
-	int task_number = 0;
+	int task_number = 1;
 	json j1;
+	string task_name1;
 	string project_name = project.get_name();
 	ifstream jsonfile(project_name + ".json");
 	jsonfile >> j1;
 	jsonfile.close();
 	int json_size = j1["Tasks"].size();
-	for (int i = 0; i < json_size ; i++)
+	
+		for (int i = 0; i < json_size ; i++)
 	{
-		task_number += 1;
+		
 		task_name += to_string(task_number);
-		if (task_name == taskName)
+		task_name1 = j1["Tasks"][task_name]["Name"];
+		
+		if (task_name1 == taskName)
 		{
+			
 			j1["Tasks"].erase(task_name);
 			break;
 		}
 		task_name = "task";
+		task_number += 1;
 	}
 
 	string filename = project_name + ".json";
@@ -211,6 +220,7 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
 	jsonfile.close();
 
 	Date project_date;
+	int task_number = j1["Project"]["Task Number"];
 	int day = j1["Project"]["Created Date"]["Day"];
 	int month = j1["Project"]["Created Date"]["Month"];;
 	int year = j1["Project"]["Created Date"]["Year"];
@@ -236,7 +246,7 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
 	Date task_created_date;
 	Date task_due_date;
 	Task new_task;
-	int task_number = 0;
+	//int task_number = 0;
 	string task_name = "task";
 	int size_tasks = j1["Tasks"].size();
 	for (int i = 0; i < size_tasks; i++)
@@ -276,7 +286,7 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
 			
 
 			new_task.set_description(j1["Tasks"][task_name]["Description"]);
-			new_task.set_id(j1["Tasks"][task_name]["ID"]);
+			//new_task.set_id(j1["Tasks"][task_name]["ID"]);
 			new_task.set_status(j1["Tasks"][task_name]["Status"]);
 
 			project_tasks.push_back(new_task);
