@@ -15,6 +15,10 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::on_buttonBox_accepted()
 {
+    //name, due date, description, status
     m_task.set_name(ui->lineEdit->text().toStdString());
+    m_task.set_description(ui->textEdit_2->text().toStdString());
+    m_task.set_due_date(ui->qDateEdit);
+    m_task.set_status(ui->qComboBox);
 }
 
