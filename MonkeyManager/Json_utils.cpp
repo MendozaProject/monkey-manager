@@ -1,9 +1,3 @@
-/*
-Need edit functions
-
-*/
-
-
 #include "date.h"
 #include "project.h"
 #include "task.h"
@@ -301,6 +295,110 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
 	project_to_load.set_description(j1["Project"]["Description"]);
 	project_to_load.set_created_date(project_date);
 	project_to_load.set_tasks(project_tasks);
+
+
+}
+void rename_project(string old_name, string new_name)
+{
+	string oldfilename = old_name + ".json";
+	string newfilename = new_name + ".json";
+    rename(oldfilename.c_str(), newfilename.c_str());
+}
+void change_project_description(string project_name, string new_description)
+{
+	json j1;
+	string filename = project_name + ".json";
+	ifstream jsonfile(filename);
+	jsonfile >> j1;
+	jsonfile.close();
+	j1["Project"]["Description"] = new_description;
+	
+	ofstream jsonfile1;
+	jsonfile1.open(filename);
+	jsonfile1 << j1;
+	jsonfile1.close();
+
+
+}
+
+//Task Change
+void change_task_name(Project& project, int task_number, string new_name)
+{
+	json j1;
+	string filename = project.get_name() + ".json";
+	ifstream jsonfile(filename);
+	jsonfile >> j1;
+	jsonfile.close();
+
+	string task_name = "task" + to_string(task_number);
+	j1["Tasks"][task_name]["Name"] = new_name;
+
+	ofstream jsonfile1;
+	jsonfile1.open(filename);
+	jsonfile1 << j1;
+	jsonfile1.close();
+}
+void change_task_due_date(Project& project, int task_number, Date new_date)
+{
+	json j1;
+	string filename = project.get_name() + ".json";
+	ifstream jsonfile(filename);
+	jsonfile >> j1;
+	jsonfile.close();
+
+	string task_name = "task" + to_string(task_number);
+
+	int day = new_date.DAY;
+	int month = new_date.MONTH;
+	int year = new_date.YEAR;
+	int hour = new_date.HOUR;
+	int minute = new_date.MINUTE;
+	int second = new_date.SECOND;
+
+	j1["Tasks"][task_name]["Due Date"]["Day"]= day;
+	j1["Tasks"][task_name]["Due Date"]["Month"]= month;
+	j1["Tasks"][task_name]["Due Date"]["Year"]= year;
+	j1["Tasks"][task_name]["Due Date"]["Hour"]= hour;
+	j1["Tasks"][task_name]["Due Date"]["Minute"]= minute;
+	j1["Tasks"][task_name]["Due Date"]["Second"]= second;
+	
+	ofstream jsonfile1;
+	jsonfile1.open(filename);
+	jsonfile1 << j1;
+	jsonfile1.close();
+}
+void change_task_description(Project& project, int task_number, string new_description)
+{
+	json j1;
+	string filename = project.get_name() + ".json";
+	ifstream jsonfile(filename);
+	jsonfile >> j1;
+	jsonfile.close();
+
+	string task_name = "task" + to_string(task_number);
+
+	j1["Tasks"][task_name]["Description"] = new_description;
+
+	ofstream jsonfile1;
+	jsonfile1.open(filename);
+	jsonfile1 << j1;
+	jsonfile1.close();
+
+
+}
+void change_task_status(Project& project, int task_number, string new_status)
+{
+	json j1;
+	string filename = project.get_name() + ".json";
+	ifstream jsonfile(filename);
+	jsonfile >> j1;
+	jsonfile.close();
+
+	string task_name = "task" + to_string(task_number);
+
+	j1["Tasks"][task_name]["Status"] = new_status;
+
+
 
 
 }
