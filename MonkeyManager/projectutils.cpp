@@ -1,10 +1,20 @@
 #include "projectutils.h"
+#include <stddef.h>
+using namespace std;
+
+ProjectUtils* ProjectUtils::m_pInstance = NULL;
 
 ProjectUtils::ProjectUtils(){}
 ProjectUtils::~ProjectUtils(){}
 
 void ProjectUtils::add_project(Project project){
     s_projects.push_back(project);
+}
+
+ProjectUtils* ProjectUtils::Instance(){
+    if (!m_pInstance)   // Only allow one instance of class to be generated.
+        m_pInstance = new ProjectUtils;
+    return m_pInstance;
 }
 
 void ProjectUtils::remove_project(string name){

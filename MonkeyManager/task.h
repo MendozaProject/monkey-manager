@@ -11,12 +11,12 @@ using namespace std;
 class Task {
     private:
         string m_name;
-        Date m_due_date;
-        Date m_created_date;
+        Date   m_due_date;
+        Date   m_created_date;
         string m_description;
-        int   m_id;
-        int    m_status;
-        int m_task_number;
+        int    m_id;
+        string m_status;
+        int    m_task_number;
 
     public:
         Task();
@@ -27,14 +27,14 @@ class Task {
         void set_due_date(Date due_date);
         void set_created_date(Date created_date);
         void set_description(string description);
-        void set_status(int status);
+        void set_status(string status);
 
         string get_name();
         Date get_due_date();
         Date get_created_date();
         string get_description();
         long get_id_number();
-        int get_status();
+        string get_status();
 };
 
 

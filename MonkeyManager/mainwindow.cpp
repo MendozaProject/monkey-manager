@@ -11,16 +11,20 @@ MainWindow::MainWindow(QWidget *parent) :
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
     deleteProjectButton= ui->deleteProjectButton;
+
     projectListView = ui->projectsList;
     projectModel = new ProjectListModel(projectVector);
     projectListView->setModel(projectModel);
+    newTaskButton = ui->newTaskButton;
 
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
+    connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
 }
 
-void MainWindow::centerAndResize() {
+void MainWindow::centerAndResize()
+{
     // get the dimension available on this screen
     QSize availableSize = qApp->desktop()->availableGeometry().size();
     int width = availableSize.width();
@@ -57,4 +61,11 @@ void MainWindow::onDeleteProjectButtonClick()
 {
     qDebug() << "Delete Project Button";
     projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
+}
+
+void MainWindow::onNewTaskButtonClicked()
+{
+    qDebug() << "Add Task Button";
+    taskDialog = new TaskDialog();
+    taskDialog->show();
 }

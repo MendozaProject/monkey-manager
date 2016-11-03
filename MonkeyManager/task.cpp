@@ -45,7 +45,7 @@ void Task::set_description(string description)
     m_description = description;
 }
 
-void Task::set_status(int status)
+void Task::set_status(string status)
 {
     m_status = status;
 }
@@ -75,7 +75,7 @@ long Task::get_id_number()
     return m_id;
 }
 
-int Task::get_status()
+string Task::get_status()
 {
     return m_status;
 }

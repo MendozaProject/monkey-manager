@@ -9,10 +9,13 @@ private:
     vector<Project> s_projects;
     vector<Project>::iterator s_projects_iterator;
     Project s_open_project;
+    static ProjectUtils* m_pInstance;
 
-public:
     ProjectUtils();
     ~ProjectUtils();
+
+public:
+    static ProjectUtils *Instance();
 
     void add_project(Project project);
     void remove_project(string name);

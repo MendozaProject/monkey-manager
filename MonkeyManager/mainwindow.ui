@@ -1406,7 +1406,7 @@ margin-right:4px;</string>
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="newTaskButton">
           <property name="styleSheet">
            <string notr="true">border:none;
 color:rgb(236, 77, 37);
