@@ -2,6 +2,7 @@
 #define PROJECTLISTMODEL_H
 #include <QAbstractListModel>
 #include <vector>
+
 #include "project.h"
 
 class ProjectListModel : public QAbstractListModel{

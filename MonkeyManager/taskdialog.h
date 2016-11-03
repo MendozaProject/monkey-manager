@@ -3,6 +3,7 @@
 #pragma once
 
 #include <QDialog>
+
 #include "task.h"
 #include "ui_taskdialog.h"
 #include "projectutils.h"
