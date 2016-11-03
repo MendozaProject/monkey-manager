@@ -16,12 +16,10 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::on_buttonBox_accepted()
 {
-    QDate date_holder = QDate();
     //name, due date, description, status
     m_task.set_name(ui->lineEdit->text().toStdString());
     m_task.set_description(ui->textEdit_2->toPlainText().toStdString());
-    //m_task.set_due_date(ui->dateEdit->date());
-    date_holder = (ui->dateEdit->date());
+    m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
     ProjectUtils::Instance()->get_open_project().add_task(m_task);

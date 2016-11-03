@@ -1,19 +1,20 @@
 #include "project.h"
 
 Project::Project(){
-
+    m_name = "New Project";
+    m_description = "Add description";
+    m_created_date = QDate().currentDate();
+    m_current_ticket = 0;
 }
 
 Project::Project(string name, string description){
     m_name = name;
     m_description = description;
-    Date date = Date();
-    date.set_current_datetime();
-    m_created_date = date;
+    m_created_date = QDate().currentDate();
+    m_current_ticket = 0;
 }
 
 Project::~Project(){
-
 }
 
 // task management functions
@@ -42,8 +43,12 @@ void Project::add_task(Task new_task){
     m_tasks.push_back(new_task);
 }
 
+int Project::assign_ticket(){
+    return m_current_ticket++;
+}
+
 // setter functions
-void Project::set_created_date(Date created_date){
+void Project::set_created_date(QDate created_date){
     m_created_date = created_date;
 }
 
@@ -60,7 +65,7 @@ void Project::set_tasks(vector<Task> tasks){
 }
 
 // getter functions
-Date Project::get_created_date(){
+QDate Project::get_created_date(){
     return m_created_date;
 }
 
