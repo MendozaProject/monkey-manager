@@ -1,7 +1,8 @@
 #ifndef Json_utils_H
 #define Json_utils_H
 #pragma once
-#include "date.h"
+
+#include <QDate>
 #include "project.h"
 #include "task.h"
 #include "projectutils.h"
@@ -18,7 +19,7 @@ void change_project_description(string project_name, string new_description);
 
 //Task Change
 void change_task_name(Project& project, int task_number, string new_name);
-void change_task_due_date(Project& project, int task_number, Date new_date);
+void change_task_due_date(Project& project, int task_number, QDate new_date);
 void change_task_description(Project& project, int task_number, string new_description);
 void change_task_status(Project& project, int task_number, string new_status);
 
