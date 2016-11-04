@@ -27,6 +27,11 @@ QVariant ProjectListModel::headerData(int section, Qt::Orientation orientation,
      else
          return QString("Row %1").arg(section);
  }
+Qt::ItemFlags ProjectListModel::flags(const QModelIndex &index) const{
+    if(!index.isValid())
+        return Qt::NoItemFlags;
+    return Qt::ItemIsSelectable|Qt::ItemIsEditable|Qt::ItemIsEnabled;
+}
 bool ProjectListModel::addProject(Project* &value, int role){
     if(role == Qt::EditRole){
         projectsList.push_back(value);
@@ -38,7 +43,6 @@ bool ProjectListModel::addProject(Project* &value, int role){
     }
     return false;
 }
-
 bool ProjectListModel::deleteProject(QModelIndex &index, int role){
     if(index.isValid() && role == Qt::EditRole){
         projectsList.erase(projectsList.begin() + index.row());
@@ -49,4 +53,13 @@ bool ProjectListModel::deleteProject(QModelIndex &index, int role){
         return true;
     }
     return false;
+}
+bool ProjectListModel::setData(const QModelIndex &index, const QVariant &value, int role){
+    if(!index.isValid())
+        return false;
+    if(role != Qt::EditRole)
+        return false;
+    Project *temp = projectsList[index.row()];
+    temp->set_name(value.toString().toStdString());
+    return true;
 }
