@@ -39,7 +39,7 @@ void create_json_project(Project newproject)
 	json j1 = {
 		{"Project",{
 			{"Name", newproject.get_name() },
-			{"Description", newproject.get_description() },
+            {"Description", newproject.get_description() },
             {"Task Number", number_task},
 			{ "Created Date",{
 				{ "Day",day },
@@ -48,6 +48,7 @@ void create_json_project(Project newproject)
 		}},
 		}},
 		{"Tasks", {
+             {"Task List",{}}
 		} }
 	  };
 
@@ -65,7 +66,7 @@ void create_json_project(Project newproject)
         int year2 = task_date.year();
 
 
-	    
+        j1["Tasks"]["Task List"][j1["Tasks"]["Task List"].size()]=name_task;
 		j1["Tasks"][name_task] = {
 		{ "Name", project_tasks[i].get_name() },
 		{ "Due Date",{
@@ -80,8 +81,9 @@ void create_json_project(Project newproject)
         }},
 		{ "Description", project_tasks[i].get_description() },
 		{ "ID", project_tasks[i].get_id_number() },
-		{ "Status", project_tasks[i].get_status() }
-		};
+        { "Status", project_tasks[i].get_status() },
+        { "Task Number", project_tasks[i].get_task_number()}
+        };
 		name_task = "task";
 	}
 	string filename = project_name + ".json";
@@ -108,6 +110,13 @@ void remove_json_task(Project project, Task taskRemove)
     task_name += to_string(task_number);
     j1["Tasks"].erase(task_name);
 
+    for (int i=0; i < j1["Tasks"]["Task List"].size(); i++)//find task number in list
+        {
+            if (j1["Tasks"]["Task List"][i] == task_name)
+            {j1["Tasks"]["Task List"].erase(i);
+                break;
+            }
+        }
 
 	string filename = project_name + ".json";
 	ofstream jsonfile1;
@@ -140,7 +149,7 @@ void add_json_task(Project project, Task new_task)
    int year2 = task_date.year();
 
 
-
+   j1["Tasks"]["Task List"][j1["Tasks"]["Task List"].size()]=task_name;
    j1["Tasks"][task_name] = {
 	   { "Name", new_task.get_name() },
 	   { "Due Date",{
@@ -155,7 +164,8 @@ void add_json_task(Project project, Task new_task)
        } },
 	   { "Description", new_task.get_description() },
 	   { "ID", new_task.get_id_number() },
-	   { "Status", new_task .get_status()}
+       { "Status", new_task .get_status()},
+       {"Task Number", new_task.get_task_number()}
    };
 
    string filename = project_name + ".json";
@@ -193,30 +203,13 @@ void load_json_project(Project& project_to_load,string projectName)//need better
 	Task new_task;
 
 
-    int size_tasks = j1["Tasks"].size();
-    //get all task numbers (need to find new way)
-    string json_string = j1.dump();
-    vector<string> tasklist;
-    int size = json_string.length();
-    string task_name = "task";
-        for (int i = 0; i < size; i++)
-        {
-            if (json_string[i] == 't'&&json_string[i + 1] == 'a'&&json_string[i + 2] == 's'&&json_string[i + 3] == 'k')
-            {
-                task_name += json_string[i + 4];
-                tasklist.push_back(task_name);
-                task_name = "task";
-            }
-
-        }
-
-
-	for (int i = 0; i < size_tasks; i++)
+    int size_tasks = j1["Tasks"]["Task List"].size();
+    string task_name=" ";
+    for (int i = 0; i < size_tasks; i++)//loads all of the tasks
 	{
 
 
-            task_name=tasklist.back();
-            tasklist.pop_back();
+            task_name=j1["Tasks"]["Task List"][i];//gets next task name
             new_task.set_name(j1["Tasks"][task_name]["Name"]);
 
 			day1 =j1["Tasks"][task_name]["Due Date"]["Day"];
@@ -237,8 +230,9 @@ void load_json_project(Project& project_to_load,string projectName)//need better
 			
 
 			new_task.set_description(j1["Tasks"][task_name]["Description"]);
-			//new_task.set_id(j1["Tasks"][task_name]["ID"]);
+            new_task.set_id_number(j1["Tasks"][task_name]["ID"]);
 			new_task.set_status(j1["Tasks"][task_name]["Status"]);
+            new_task.set_task_number(j1["Tasks"][task_name]["Task Number"]);
 
 			project_tasks.push_back(new_task);
 			task_name = "task";

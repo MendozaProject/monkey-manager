@@ -49,6 +49,10 @@ void Task::set_status(string status)
 {
     m_status = status;
 }
+void Task::set_id_number(long id)
+{
+    m_id=id;
+}
 
 void Task::set_task_number(int task_number)
 {
