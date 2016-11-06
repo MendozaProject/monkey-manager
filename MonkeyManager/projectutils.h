@@ -10,6 +10,7 @@ private:
     vector<Project>::iterator s_projects_iterator;
     Project s_open_project;
     static ProjectUtils* m_pInstance;
+    Task s_opened_task;
 
     ProjectUtils();
     ~ProjectUtils();
@@ -19,6 +20,7 @@ public:
 
     void add_project(Project project);
     void remove_project(string name);
+
     Project find_project_by_name(string name);
 
     void open_project(string name);
@@ -26,6 +28,11 @@ public:
 
     void set_projects(vector<Project> projects);
     vector<Project> get_projects();
+
+    void open_task(Task task);
+    void close_task();
+
+    Task get_open_task();
 };
 
 #endif // PROJECTUTILS_H

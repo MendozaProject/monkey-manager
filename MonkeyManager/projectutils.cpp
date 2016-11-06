@@ -60,9 +60,22 @@ Project ProjectUtils::get_open_project(){
 }
 
 void ProjectUtils::set_projects(vector<Project> projects){
-
+    s_projects = projects;
 }
 
 vector<Project> ProjectUtils::get_projects(){
     return s_projects;
+}
+
+
+void ProjectUtils::open_task(Task task){
+    s_opened_task = task;
+}
+
+void ProjectUtils::close_task(){
+    s_opened_task = NULL;
+}
+
+Task ProjectUtils::get_open_task(){
+    return s_opened_task;
 }

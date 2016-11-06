@@ -7,6 +7,12 @@ TaskDialog::TaskDialog(QWidget *parent) :
     ui(new Ui::TaskDialog)
 {
     ui->setupUi(this);
+    m_task = ProjectUtils::Instance()->get_open_task();
+
+    (ui->nameLineEdit)->setText(QString::fromUtf8(m_task.get_name().c_str()));
+    (ui->descriptionTextEdit)->setText(QString::fromUtf8(m_task.get_description().c_str()));
+    (ui->dateEdit)->setDate(m_task.get_due_date());
+
 }
 
 TaskDialog::~TaskDialog()
