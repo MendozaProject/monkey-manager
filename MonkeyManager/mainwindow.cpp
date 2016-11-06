@@ -21,6 +21,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+
+    if (ProjectUtils::Instance()->get_projects().empty()){
+        ProjectUtils::Instance()->add_project(Project());
+    }
+    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
 }
 
 void MainWindow::centerAndResize()

@@ -28,6 +28,6 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
-    ProjectUtils::Instance()->get_open_project().add_task(m_task);
+    //ProjectUtils::Instance()->get_open_project().add_task(m_task);
 }
 

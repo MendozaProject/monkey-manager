@@ -68,7 +68,7 @@ vector<Project> ProjectUtils::get_projects(){
 }
 
 
-void ProjectUtils::open_task(Task task){
+void ProjectUtils::open_task(Task& task){
     s_opened_task = task;
 }
 

@@ -29,7 +29,7 @@ public:
     void set_projects(vector<Project> projects);
     vector<Project> get_projects();
 
-    void open_task(Task task);
+    void open_task(Task& task);
     void close_task();
 
     Task get_open_task();
