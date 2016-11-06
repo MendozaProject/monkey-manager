@@ -254,6 +254,18 @@ void rename_project(string old_name, string new_name)
 {
 	string oldfilename = old_name + ".json";
 	string newfilename = new_name + ".json";
+    json j1;
+
+    ifstream jsonfile(oldfilename);
+    jsonfile >> j1;
+    jsonfile.close();
+
+    j1["Project"]["Name"]=new_name;
+
+    ofstream jsonfile1;
+    jsonfile1.open(oldfilename);
+    jsonfile1 << j1;
+    jsonfile1.close();
     rename(oldfilename.c_str(), newfilename.c_str());
 }
 void change_project_description(string project_name, string new_description)
@@ -344,7 +356,10 @@ void change_task_status(Project& project, int task_number, string new_status)
 
 	j1["Tasks"][task_name]["Status"] = new_status;
 
-
+    ofstream jsonfile1;
+    jsonfile1.open(filename);
+    jsonfile1 << j1;
+    jsonfile1.close();
 
 
 }
