@@ -22,9 +22,9 @@ void remove_json_project(string projectName)
 	string filename = projectName + ".json";
     remove(filename.c_str());
 }
-void create_json_project(Project newproject) //need function in Project or Task for Task number
+void create_json_project(Project newproject)
 {
-	int number_task = 0;
+    int number_task = newproject.get_current_ticket();
 	string name_task = "task";
 	string project_name = newproject.get_name();
 	
@@ -40,7 +40,7 @@ void create_json_project(Project newproject) //need function in Project or Task 
 		{"Project",{
 			{"Name", newproject.get_name() },
 			{"Description", newproject.get_description() },
-			{"Task Number", 0},
+            {"Task Number", number_task},
 			{ "Created Date",{
 				{ "Day",day },
 				{ "Month",month },
@@ -51,9 +51,9 @@ void create_json_project(Project newproject) //need function in Project or Task 
 		} }
 	  };
 
-	for (int i = 0; i < task_size; i++)//use m_task_number for number_task once function is made
+    for (int i = 0; i < task_size; i++)
 	{
-		number_task += 1;
+        number_task = project_tasks[i].get_task_number();
 		name_task += to_string(number_task);
         QDate task_due = project_tasks[i].get_due_date();
         QDate task_date = project_tasks[i].get_created_date();
@@ -92,34 +92,22 @@ void create_json_project(Project newproject) //need function in Project or Task 
 
 	
 }
-void remove_json_task(Project project, Task taskRemove)//need to chnage once m_task_number function is made
+void remove_json_task(Project project, Task taskRemove)
 {
 	string taskName = taskRemove.get_name();
 	string task_name = "task";
-	int task_number = 1;
+    int task_number = taskRemove.get_task_number();
 	json j1;
 	string task_name1;
 	string project_name = project.get_name();
 	ifstream jsonfile(project_name + ".json");
 	jsonfile >> j1;
 	jsonfile.close();
-	int json_size = j1["Tasks"].size();
+
 	
-		for (int i = 0; i < json_size ; i++)
-	{
-		
-		task_name += to_string(task_number);
-		task_name1 = j1["Tasks"][task_name]["Name"];
-		
-		if (task_name1 == taskName)
-		{
-			
-			j1["Tasks"].erase(task_name);
-			break;
-		}
-		task_name = "task";
-		task_number += 1;
-	}
+    task_name += to_string(task_number);
+    j1["Tasks"].erase(task_name);
+
 
 	string filename = project_name + ".json";
 	ofstream jsonfile1;
@@ -139,7 +127,7 @@ void add_json_task(Project project, Task new_task)
 	jsonfile >> j1;
 	jsonfile.close();
 
-   int task_number = 1 + j1["Tasks"].size();
+   int task_number = new_task.get_task_number();
    string task_name = "task" + to_string(task_number);
 
    QDate task_due = new_task.get_due_date();
@@ -177,7 +165,7 @@ void add_json_task(Project project, Task new_task)
    jsonfile1.close();
 
 }
-void load_json_project(Project& project_to_load,string projectName)//send empty project and name of project to load
+void load_json_project(Project& project_to_load,string projectName)//need better way to get task names
 {
 	json j1;
 
@@ -203,15 +191,33 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
     QDate task_created_date;
     QDate task_due_date;
 	Task new_task;
-	//int task_number = 0;
-	string task_name = "task";
-	int size_tasks = j1["Tasks"].size();
+
+
+    int size_tasks = j1["Tasks"].size();
+    //get all task numbers (need to find new way)
+    string json_string = j1.dump();
+    vector<string> tasklist;
+    int size = json_string.length();
+    string task_name = "task";
+        for (int i = 0; i < size; i++)
+        {
+            if (json_string[i] == 't'&&json_string[i + 1] == 'a'&&json_string[i + 2] == 's'&&json_string[i + 3] == 'k')
+            {
+                task_name += json_string[i + 4];
+                tasklist.push_back(task_name);
+                task_name = "task";
+            }
+
+        }
+
+
 	for (int i = 0; i < size_tasks; i++)
 	{
-		
-			task_number += 1;
-			task_name += to_string(task_number);
-			new_task.set_name(j1["Tasks"][task_name]["Name"]);
+
+
+            task_name=tasklist.back();
+            tasklist.pop_back();
+            new_task.set_name(j1["Tasks"][task_name]["Name"]);
 
 			day1 =j1["Tasks"][task_name]["Due Date"]["Day"];
 			month1= j1["Tasks"][task_name]["Due Date"]["Month"];
@@ -246,6 +252,7 @@ void load_json_project(Project& project_to_load,string projectName)//send empty 
 	project_to_load.set_description(j1["Project"]["Description"]);
 	project_to_load.set_created_date(project_date);
 	project_to_load.set_tasks(project_tasks);
+    project_to_load.set_current_ticket(j1["Project"]["Task Number"]);
 
 
 }

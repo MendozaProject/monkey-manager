@@ -50,6 +50,11 @@ void Task::set_status(string status)
     m_status = status;
 }
 
+void Task::set_task_number(int task_number)
+{
+   m_task_number=task_number;
+}
+
 string Task::get_name()
 {
     return m_name;
@@ -79,3 +84,8 @@ string Task::get_status()
 {
     return m_status;
 }
+int Task::get_task_number()
+{
+    return m_task_number;
+}
+

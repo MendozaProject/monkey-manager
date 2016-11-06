@@ -9,7 +9,7 @@
 
 #include "json.hpp"
 void remove_json_project(string projectName);
-void create_json_project(Project newproject);//need to use new tasknumber
+void create_json_project(Project newproject);
 void remove_json_task(Project project, Task taskRemove);
 void add_json_task(Project project, Task new_task);
 void load_json_project(Project& project_to_load, string projectName);
