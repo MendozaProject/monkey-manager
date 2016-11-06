@@ -7,6 +7,12 @@ TaskDialog::TaskDialog(QWidget *parent) :
     ui(new Ui::TaskDialog)
 {
     ui->setupUi(this);
+    m_task = ProjectUtils::Instance()->get_open_task();
+
+    (ui->nameLineEdit)->setText(QString::fromUtf8(m_task.get_name().c_str()));
+    (ui->descriptionTextEdit)->setText(QString::fromUtf8(m_task.get_description().c_str()));
+    (ui->dateEdit)->setDate(m_task.get_due_date());
+
 }
 
 TaskDialog::~TaskDialog()
@@ -22,6 +28,6 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
-    ProjectUtils::Instance()->get_open_project().add_task(m_task);
+    //ProjectUtils::Instance()->get_open_project().add_task(m_task);
 }
 

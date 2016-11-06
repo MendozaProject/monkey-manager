@@ -25,19 +25,22 @@ public:
 private slots:
     void onNewProjectButtonClick();
     void onDeleteProjectButtonClick();
-
     void onNewTaskButtonClicked();
 
 private:
     Ui::MainWindow *ui;
+
     QPushButton *newProjectButton;
     QPushButton *deleteProjectButton;
     QPushButton *newTaskButton;
+
     QListView *projectListView;
     ProjectListModel *projectModel;
-    vector<Project*> projectVector;
 
+    vector<Project*> projectVector;
     TaskDialog *taskDialog;
+
+
 };
 
 #endif // MAINWINDOW_H

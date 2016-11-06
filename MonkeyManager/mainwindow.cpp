@@ -21,6 +21,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+
+    if (ProjectUtils::Instance()->get_projects().empty()){
+        ProjectUtils::Instance()->add_project(Project());
+    }
+    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
 }
 
 void MainWindow::centerAndResize()
@@ -67,7 +72,8 @@ void MainWindow::onDeleteProjectButtonClick()
 
 void MainWindow::onNewTaskButtonClicked()
 {
-    qDebug() << "Add Task Button";
+    qDebug() << "Add New Task Button";
+    ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project().assign_ticket()));
     taskDialog = new TaskDialog();
     taskDialog->show();
 }
