@@ -27,7 +27,7 @@ public:
     Project get_open_project();
 
     void set_projects(vector<Project> projects);
-    vector<Project> get_projects();
+    vector<Project>& get_projects();
 
     void open_task(Task& task);
     void close_task();

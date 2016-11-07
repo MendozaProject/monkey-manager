@@ -12,8 +12,14 @@ MainWindow::MainWindow(QWidget *parent) :
     newProjectButton = ui->newProjectButton;
     deleteProjectButton= ui->deleteProjectButton;
 
+    if (ProjectUtils::Instance()->get_projects().empty()){
+        ProjectUtils::Instance()->add_project(Project());
+    }
+    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
+    m_project = ProjectUtils::Instance()->get_open_project();
+
     projectListView = ui->projectsList;
-    projectModel = new ProjectListModel(projectVector);
+    projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
 
@@ -23,12 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
-
-    if (ProjectUtils::Instance()->get_projects().empty()){
-        ProjectUtils::Instance()->add_project(Project());
-    }
-    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
-    m_project = ProjectUtils::Instance()->get_open_project();
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
 
@@ -64,7 +64,7 @@ MainWindow::~MainWindow()
 void MainWindow::onNewProjectButtonClick()
 {
     qDebug() << "New Project Button";
-    Project* newProject = new Project("New Project", "");
+    Project newProject("New Project", "");
     projectModel->addProject(newProject, Qt::EditRole);
 }
 
