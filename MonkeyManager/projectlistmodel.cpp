@@ -12,7 +12,8 @@ QVariant ProjectListModel::data(const QModelIndex& index, int role) const {
     if (index.row() >= projectsList.size())
         return QVariant();
     if (role == Qt::DisplayRole) {
-        string temp = projectsList.at(index.row())->get_name();
+        const Project &project = projectsList[index.row()];
+        string temp = project.get_name();
         QString tempQ = QString::fromStdString(temp);
         return QVariant(tempQ);
     } else {
@@ -33,7 +34,7 @@ Qt::ItemFlags ProjectListModel::flags(const QModelIndex &index) const{
         return Qt::NoItemFlags;
     return Qt::ItemIsSelectable|Qt::ItemIsEditable|Qt::ItemIsEnabled;
 }
-bool ProjectListModel::addProject(Project* &value, int role){
+bool ProjectListModel::addProject(Project &value, int role){
     if(role == Qt::EditRole){
         projectsList.push_back(value);
 
@@ -60,8 +61,8 @@ bool ProjectListModel::setData(const QModelIndex &index, const QVariant &value, 
         return false;
     if(role != Qt::EditRole)
         return false;
-    Project *temp = projectsList[index.row()];
+    Project &temp = projectsList[index.row()];
     if (!(value.toString().trimmed() == ""))
-        temp->set_name(value.toString().trimmed().toStdString());
+        temp.set_name(value.toString().trimmed().toStdString());
     return true;
 }

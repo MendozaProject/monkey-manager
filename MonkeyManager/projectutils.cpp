@@ -63,7 +63,7 @@ void ProjectUtils::set_projects(vector<Project> projects){
     s_projects = projects;
 }
 
-vector<Project> ProjectUtils::get_projects(){
+vector<Project>& ProjectUtils::get_projects(){
     return s_projects;
 }
 

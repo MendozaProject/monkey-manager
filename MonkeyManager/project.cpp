@@ -73,7 +73,7 @@ QDate Project::get_created_date(){
     return m_created_date;
 }
 
-string Project::get_name(){
+string Project::get_name() const {
     return m_name;
 }
 

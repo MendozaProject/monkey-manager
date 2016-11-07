@@ -41,7 +41,7 @@ class Project {
         
         // getter functions
         QDate get_created_date();
-        string get_name();
+        string get_name() const;
         string get_description();
         vector<Task> get_tasks();
         int get_current_ticket();

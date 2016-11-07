@@ -39,7 +39,7 @@ private:
     QListView *projectListView;
     ProjectListModel *projectModel;
 
-    vector<Project*> projectVector;
+    vector<Project> projectVector;
     TaskDialog *taskDialog;
 
     Project m_project;
