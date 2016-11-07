@@ -34,13 +34,15 @@ private:
     QPushButton *deleteProjectButton;
     QPushButton *newTaskButton;
 
+    QLabel *projectNameLabel;
+
     QListView *projectListView;
     ProjectListModel *projectModel;
 
     vector<Project*> projectVector;
     TaskDialog *taskDialog;
 
-
+    Project m_project;
 };
 
 #endif // MAINWINDOW_H

@@ -33,6 +33,8 @@ public:
     void close_task();
 
     Task get_open_task();
+
+    string trim_string(string s);
 };
 
 #endif // PROJECTUTILS_H

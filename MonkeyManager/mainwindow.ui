@@ -717,7 +717,7 @@ color:rgb(255, 255, 255);</string>
         <number>16</number>
        </property>
        <item>
-        <widget class="QLabel" name="ProjectNameLabel">
+        <widget class="QLabel" name="projectNameLabel">
          <property name="minimumSize">
           <size>
            <width>0</width>
