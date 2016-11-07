@@ -27,6 +27,8 @@ class Task {
         void set_created_date(QDate created_date);
         void set_description(string description);
         void set_status(string status);
+        void set_id_number(long id);
+        void set_task_number(int task_number);
 
         string get_name();
         QDate get_due_date();
@@ -34,6 +36,7 @@ class Task {
         string get_description();
         long get_id_number();
         string get_status();
+        int get_task_number();
 };
 
 
