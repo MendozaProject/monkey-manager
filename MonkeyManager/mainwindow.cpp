@@ -17,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
 
+    projectNameLabel = ui->projectNameLabel;
+
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
@@ -26,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
         ProjectUtils::Instance()->add_project(Project());
     }
     ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
+    m_project = ProjectUtils::Instance()->get_open_project();
+
+    projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
+
 }
 
 void MainWindow::centerAndResize()

@@ -63,6 +63,10 @@ void Project::set_description(string description){
 void Project::set_tasks(vector<Task> tasks){
     m_tasks = tasks;
 }
+void Project::set_current_ticket(int ticket_number)
+{
+    m_current_ticket=ticket_number;
+}
 
 // getter functions
 QDate Project::get_created_date(){
@@ -79,4 +83,8 @@ string Project::get_description(){
 
 vector<Task> Project::get_tasks(){
     return m_tasks;
+}
+int Project::get_current_ticket()
+{
+    return m_current_ticket;
 }

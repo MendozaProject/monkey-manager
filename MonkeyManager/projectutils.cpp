@@ -79,3 +79,15 @@ void ProjectUtils::close_task(){
 Task ProjectUtils::get_open_task(){
     return s_opened_task;
 }
+
+string ProjectUtils::trim_string(string s){
+    int i = 0;
+
+    while(s.at(i) == ' ')
+        i++;
+    size_t j = s.length() - 1;
+    while(s.at(j) == ' ')
+        j--;
+
+    return s.substr(i, j - i + 1);
+}

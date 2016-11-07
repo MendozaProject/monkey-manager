@@ -1,6 +1,7 @@
 #include "projectlistmodel.h"
 #include <QString>
 #include <string>
+#include <projectutils.h>
 
 int ProjectListModel::rowCount(const QModelIndex& parent) const {
     return projectsList.size();
@@ -60,6 +61,7 @@ bool ProjectListModel::setData(const QModelIndex &index, const QVariant &value, 
     if(role != Qt::EditRole)
         return false;
     Project *temp = projectsList[index.row()];
-    temp->set_name(value.toString().toStdString());
+    if (!(value.toString().trimmed() == ""))
+        temp->set_name(value.toString().trimmed().toStdString());
     return true;
 }
