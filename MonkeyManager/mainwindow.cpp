@@ -79,7 +79,7 @@ void MainWindow::onDeleteProjectButtonClick()
 void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << "Add New Task Button";
-    ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project().assign_ticket()));
+    //ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project().assign_ticket()));
     taskDialog = new TaskDialog();
     taskDialog->show();
 }

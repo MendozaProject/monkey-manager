@@ -1,6 +1,7 @@
 #ifndef KANBANBOARD_H
 #define KANBANBOARD_H
 
+#include "project.h"
 
 class kanbanBoard
 {
