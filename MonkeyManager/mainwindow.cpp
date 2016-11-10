@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QLabel>
+#include "taskwidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +24,11 @@ MainWindow::MainWindow(QWidget *parent) :
     projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
+
+    toDoLayout = ui->Todo_List;
+    doingLayout = ui->Doing_List;
+    testingLayout = ui->Testing_List;
+    doneLayout = ui->Done_List;
 
     projectNameLabel = ui->projectNameLabel;
 
@@ -80,6 +87,12 @@ void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << "Add New Task Button";
     //ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project().assign_ticket()));
+    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+        return;
     taskDialog = new TaskDialog();
     taskDialog->show();
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event){
+    qDebug() << "Mouse";
 }
