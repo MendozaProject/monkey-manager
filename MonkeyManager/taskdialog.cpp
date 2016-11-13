@@ -1,6 +1,7 @@
 #include "taskdialog.h"
 #include "ui_taskdialog.h"
 #include "projectutils.h"
+#include <QDebug>
 
 TaskDialog::TaskDialog(QWidget *parent) :
     QDialog(parent),
@@ -29,5 +30,6 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
     ProjectUtils::Instance()->get_open_project().add_task(m_task);
+    qDebug() << "CLICKED NEW TASK BUTTON";
 }
 
