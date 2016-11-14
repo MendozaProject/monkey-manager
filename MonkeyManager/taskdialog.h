@@ -3,7 +3,6 @@
 #pragma once
 
 #include <QDialog>
-
 #include "task.h"
 #include "ui_taskdialog.h"
 #include "projectutils.h"
@@ -26,6 +25,7 @@ private slots:
 private:
     Task m_task;
     Ui::TaskDialog *ui;
+    QDialogButtonBox *taskDialogAccept;
 };
 
 #endif // taskdialog_H

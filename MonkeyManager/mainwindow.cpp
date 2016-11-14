@@ -4,11 +4,20 @@
 #include <QDesktopWidget>
 #include <QLabel>
 #include "taskwidget.h"
+#include "taskdialog.h"
+
+static MainWindow *s_pMainWindow = NULL;
+
+MainWindow *MainWindow::getInstance()
+{
+    return s_pMainWindow;
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    s_pMainWindow = this;
     ui->setupUi(this);
     this->centerAndResize();
     newProjectButton = ui->newProjectButton;
@@ -92,7 +101,14 @@ void MainWindow::onNewTaskButtonClicked()
 
     taskDialog = new TaskDialog();
     taskDialog->show();
-    //ui->Todo_List->addWidget(new TaskWidget);
+}
+
+void MainWindow::onTaskDialogAccepted()
+{
+    TaskWidget *task = new TaskWidget;
+    ui->Todo_List->addWidget(task);
+    qDebug() << "TASK ACCEPTED!!!!!";
+
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){

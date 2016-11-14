@@ -28,6 +28,12 @@ public:
     void updateTaskInTesting();
     void updateTaskInToDone();
 
+    static MainWindow *getInstance();
+
+
+public slots:
+    void onTaskDialogAccepted();
+
 private slots:
     void onNewProjectButtonClick();
     void onDeleteProjectButtonClick();

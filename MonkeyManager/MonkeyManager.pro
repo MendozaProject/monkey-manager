@@ -19,8 +19,7 @@ SOURCES += main.cpp\
     projectutils.cpp \
     taskwidget.cpp \
     taskdialog.cpp \
-    projectlistmodel.cpp \
-    kanbanboard.cpp
+    projectlistmodel.cpp
 
 HEADERS  += mainwindow.h \
     project.h \
@@ -29,8 +28,7 @@ HEADERS  += mainwindow.h \
     projectutils.h \
     taskwidget.h \
     taskdialog.h \
-    projectlistmodel.h \
-    kanbanboard.h
+    projectlistmodel.h
 
 FORMS    += mainwindow.ui \
     taskwidget.ui \
