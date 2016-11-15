@@ -12,7 +12,8 @@ void remove_json_project(string projectName);
 void create_json_project(Project newproject);
 void remove_json_task(Project project, Task taskRemove);
 void add_json_task(Project project, Task new_task);
-void load_json_project(Project& project_to_load, string projectName);
+Project load_json_project(string projectName);
+vector <Project> load_all_projects();
 //Project Change
 void rename_project(string old_name, string new_name);
 void change_project_description(string project_name, string new_description);
