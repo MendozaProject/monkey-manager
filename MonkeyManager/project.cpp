@@ -1,5 +1,7 @@
 #include "project.h"
 
+#include <QDebug>;
+
 Project::Project(){
     m_name = "New Project";
     m_description = "Add description";
@@ -41,6 +43,7 @@ void Project::remove_task(int index){
 
 void Project::add_task(Task new_task){
     m_tasks.push_back(new_task);
+    qDebug() << "From Project add task: " + QString::fromStdString(to_string(m_tasks.size()));
 }
 
 int Project::assign_ticket(){
@@ -83,6 +86,7 @@ string Project::get_description(){
 
 vector<Task> Project::get_tasks(){
     return m_tasks;
+    qDebug() << "From Project get tasks: " + QString::fromStdString(to_string(m_tasks.size()));
 }
 
 int Project::get_current_ticket()

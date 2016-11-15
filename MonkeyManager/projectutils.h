@@ -23,10 +23,9 @@ public:
 
     Project find_project_by_name(string name);
 
-    void open_project(Project current_project);
-
+    void open_project(Project project);
     void open_project(string name);
-    Project get_open_project();
+    Project& get_open_project();
 
     void set_projects(vector<Project> projects);
     vector<Project>& get_projects();
@@ -34,7 +33,7 @@ public:
     void open_task(Task& task);
     void close_task();
 
-    Task get_open_task();
+    Task& get_open_task();
 
     string trim_string(string s);
 };

@@ -51,15 +51,15 @@ Project ProjectUtils::find_project_by_name(string name){
     return proj;
 }
 
-void ProjectUtils::open_project(Project current_project) {
-    s_open_project = current_project;
+void ProjectUtils::open_project(Project project) {
+    s_open_project = project;
 }
 
 void ProjectUtils::open_project(string name){
     s_open_project = find_project_by_name(name);
 }
 
-Project ProjectUtils::get_open_project(){
+Project& ProjectUtils::get_open_project(){
     return s_open_project;
 }
 
@@ -80,7 +80,7 @@ void ProjectUtils::close_task(){
     s_opened_task = NULL;
 }
 
-Task ProjectUtils::get_open_task(){
+Task& ProjectUtils::get_open_task(){
     return s_opened_task;
 }
 

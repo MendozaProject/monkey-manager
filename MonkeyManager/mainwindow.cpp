@@ -116,6 +116,7 @@ void MainWindow::onTaskDialogAccepted()
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
     qDebug() << "Main Window TASK ACCEPTED!!!!!";
+    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
