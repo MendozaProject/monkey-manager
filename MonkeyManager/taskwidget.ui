@@ -26,7 +26,7 @@
    <string notr="true">background-color:rgb(240, 89, 43);
 color:rgb(255, 255, 255);</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -34,78 +34,18 @@ color:rgb(255, 255, 255);</string>
     <number>12</number>
    </property>
    <item>
-    <widget class="QWidget" name="widget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QLabel" name="name">
+     <property name="text">
+      <string>Name</string>
      </property>
-     <property name="layoutDirection">
-      <enum>Qt::RightToLeft</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="name_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="text">
-         <string>Name:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="due_date">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Due Date:</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="nameDate">
-     <item>
-      <widget class="QLabel" name="name">
-       <property name="text">
-        <string>name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="date">
-       <property name="text">
-        <string>date</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QLabel" name="date">
+     <property name="text">
+      <string>Date</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

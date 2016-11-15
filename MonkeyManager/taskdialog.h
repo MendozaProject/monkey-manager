@@ -10,12 +10,13 @@
 namespace Ui {
 class TaskDialog;
 }
-
+Q_DECLARE_METATYPE(Task)//might not be needed
 class TaskDialog : public QDialog
 {
     Q_OBJECT
 
-    Q_SIGNAL void finished();
+signals:
+    void task_add(Task task);
 
 public:
     explicit TaskDialog(QWidget *parent = 0);

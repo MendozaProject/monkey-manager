@@ -12,30 +12,16 @@ TaskWidget::TaskWidget(QWidget *parent) :
     ui(new Ui::TaskWidget)
 {
     ui->setupUi(this);
+    name = ui->name;
+    date = ui->date;
 
-//    name = new QLabel("name");
-//    date = new QLabel("date");
+    Task temp_task = ProjectUtils::Instance()->get_open_task();
+    name->setText(QString::fromStdString(temp_task.get_name()));
+    date->setText(temp_task.get_due_date().toString("yyyy.MM.dd"));
 
-//    ui->nameDate->addWidget(name);
-//    ui->nameDate->addWidget(date);
+    qDebug() << "From TaskWidget Creation: " + QString::fromStdString(temp_task.get_name()) ;
 
-     vector<Task> temp_tasks = ProjectUtils::Instance()->get_open_project().get_tasks();
-    qDebug() << "!!!!!!!!!!!!!!!!!!!!!!" ;
-     QString test = QString::fromStdString(temp_tasks[0].get_name());
-     qDebug() << "!!!!!!!!!!!!!!!!!!!!!!" << test;
-
-
-     if(temp_tasks.size() !=0) {
-        Task task = temp_tasks[(temp_tasks.size()-1)];
-        ui->name->setText(QString::fromStdString(task.get_name()));
-        //ui->date->setText(task.get_due_date().toString());
-     }
-     else {
-         Task task = temp_tasks[0];
-         ui->name->setText(QString::fromStdString(task.get_name()));
-         //ui->date->setText(task.get_due_date().toString());
-      }
-     }
+}
 
 TaskWidget::~TaskWidget()
 {
