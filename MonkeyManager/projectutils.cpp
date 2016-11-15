@@ -51,6 +51,10 @@ Project ProjectUtils::find_project_by_name(string name){
     return proj;
 }
 
+void ProjectUtils::open_project(Project current_project) {
+    s_open_project = current_project;
+}
+
 void ProjectUtils::open_project(string name){
     s_open_project = find_project_by_name(name);
 }

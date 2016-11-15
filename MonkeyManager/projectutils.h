@@ -23,6 +23,8 @@ public:
 
     Project find_project_by_name(string name);
 
+    void open_project(Project current_project);
+
     void open_project(string name);
     Project get_open_project();
 

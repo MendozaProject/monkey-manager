@@ -5,6 +5,7 @@
 #include <QLabel>
 #include "taskwidget.h"
 #include "taskdialog.h"
+#include "project.h"
 
 static MainWindow *s_pMainWindow = NULL;
 
@@ -95,9 +96,10 @@ void MainWindow::onDeleteProjectButtonClick()
 void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << "Add New Task Button";
-    //ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project())) //.assign_ticket()));
+    //ProjectUtils::Instance()->open_task(Task(ProjectUtils::Instance()->get_open_project().assign_ticket()));
     if(projectListView->selectionModel()->selectedIndexes().isEmpty())
         return;
+    ProjectUtils::Instance()->open_project();
 
     taskDialog = new TaskDialog();
     taskDialog->show();
@@ -106,9 +108,13 @@ void MainWindow::onNewTaskButtonClicked()
 void MainWindow::onTaskDialogAccepted()
 {
     TaskWidget *task = new TaskWidget;
-    ui->Todo_List->addWidget(task);
-    qDebug() << "TASK ACCEPTED!!!!!";
 
+    ui->Todo_List->addWidget(task);
+
+    //ProjectUtils::Instance()->open_task()
+
+    //task->name->setText("TESTING123!!!");
+    qDebug() << "TASK ACCEPTED!!!!!";
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){

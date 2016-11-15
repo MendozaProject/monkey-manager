@@ -15,9 +15,12 @@ class TaskDialog : public QDialog
 {
     Q_OBJECT
 
+    Q_SIGNAL void finished();
+
 public:
     explicit TaskDialog(QWidget *parent = 0);
     ~TaskDialog();
+    Task getTask(Task task);
 
 private slots:
     void on_buttonBox_accepted();

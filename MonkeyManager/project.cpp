@@ -84,6 +84,7 @@ string Project::get_description(){
 vector<Task> Project::get_tasks(){
     return m_tasks;
 }
+
 int Project::get_current_ticket()
 {
     return m_current_ticket;

@@ -3,6 +3,7 @@
 #include "projectutils.h"
 #include "mainwindow.h"
 #include <QDebug>
+#include <iostream>
 
 TaskDialog::TaskDialog(QWidget *parent) :
     QDialog(parent),
@@ -29,14 +30,23 @@ TaskDialog::~TaskDialog()
 
 void TaskDialog::on_buttonBox_accepted()
 {
+    //int r=1;
     //name, due date, description, status
     m_task.set_name(ui->nameLineEdit->text().toStdString());
     m_task.set_description(ui->descriptionTextEdit->toPlainText().toStdString());
     m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
+//    QString test = QString::fromStdString(m_task.get_name());
+//    qDebug() << "!!!!!!!!!!!!!!!!!!!!!!" << test;
+
     ProjectUtils::Instance()->get_open_project().add_task(m_task);
 
 
     qDebug() << "CLICKED NEW TASK BUTTON";
+}
+
+Task TaskDialog::getTask(Task task)
+{
+    return task;
 }
