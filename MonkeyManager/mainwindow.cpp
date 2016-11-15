@@ -106,8 +106,15 @@ void MainWindow::onNewTaskButtonClicked()
 void MainWindow::onTaskDialogAccepted()
 {
     TaskWidget *task = new TaskWidget;
-
-    ui->Todo_List->addWidget(task);
+    Task current = ProjectUtils::Instance()->get_open_task();
+    if(current.get_status() == "To Do")
+        ui->Todo_List->addWidget(task);
+    else if(current.get_status() == "Doing")
+        ui->Doing_List->addWidget(task);
+    else if(current.get_status() == "Testing")
+        ui->Testing_List->addWidget(task);
+    else if(current.get_status() == "Done")
+        ui->Done_List->addWidget(task);
     qDebug() << "Main Window TASK ACCEPTED!!!!!";
 }
 
