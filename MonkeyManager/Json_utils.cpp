@@ -1,4 +1,7 @@
 #include <QDate>
+#include <QDebug>
+#include <QFileInfo>
+#include <QDirIterator>
 #include "project.h"
 #include "task.h"
 #include "projectutils.h"
@@ -65,7 +68,6 @@ void create_json_project(Project newproject)
         int month2 = task_date.month();
         int year2 = task_date.year();
 
-
         j1["Tasks"]["Task List"][j1["Tasks"]["Task List"].size()]=name_task;
 		j1["Tasks"][name_task] = {
 		{ "Name", project_tasks[i].get_name() },
@@ -91,7 +93,6 @@ void create_json_project(Project newproject)
 	jsonfile.open(filename);
 	jsonfile << j1;
 	jsonfile.close();
-
 	
 }
 void remove_json_task(Project project, Task taskRemove)
@@ -105,7 +106,6 @@ void remove_json_task(Project project, Task taskRemove)
 	ifstream jsonfile(project_name + ".json");
 	jsonfile >> j1;
 	jsonfile.close();
-
 	
     task_name += to_string(task_number);
     j1["Tasks"].erase(task_name);
@@ -123,7 +123,6 @@ void remove_json_task(Project project, Task taskRemove)
 	jsonfile1.open(filename);
 	jsonfile1 << j1;
 	jsonfile1.close();
-
 
 }
 void add_json_task(Project project, Task new_task)
@@ -147,7 +146,6 @@ void add_json_task(Project project, Task new_task)
    int day2 = task_date.day();
    int month2 = task_date.month();
    int year2 = task_date.year();
-
 
    j1["Tasks"]["Task List"][j1["Tasks"]["Task List"].size()]=task_name;
    j1["Tasks"][task_name] = {
@@ -175,14 +173,14 @@ void add_json_task(Project project, Task new_task)
    jsonfile1.close();
 
 }
-void load_json_project(Project& project_to_load,string projectName)//need better way to get task names
+Project load_json_project(string projectName)//need better way to get task names
 {
+    Project project_to_load;
 	json j1;
 
-	ifstream jsonfile(projectName + ".json");
+    ifstream jsonfile(projectName);
 	jsonfile >> j1;
 	jsonfile.close();
-
 
 	int task_number = j1["Project"]["Task Number"];
 	int day = j1["Project"]["Created Date"]["Day"];
@@ -190,25 +188,19 @@ void load_json_project(Project& project_to_load,string projectName)//need better
 	int year = j1["Project"]["Created Date"]["Year"];
     QDate project_date(year,month,day);
 
-
-
 	int day1 = 0;
 	int month1 = 0;
 	int year1 = 0;
-
 
 	vector <Task> project_tasks;
     QDate task_created_date;
     QDate task_due_date;
 	Task new_task;
 
-
     int size_tasks = j1["Tasks"]["Task List"].size();
     string task_name=" ";
     for (int i = 0; i < size_tasks; i++)//loads all of the tasks
 	{
-
-
             task_name=j1["Tasks"]["Task List"][i];//gets next task name
             new_task.set_name(j1["Tasks"][task_name]["Name"]);
 
@@ -227,20 +219,14 @@ void load_json_project(Project& project_to_load,string projectName)//need better
             task_created_date.setDate(year1,month1,day1);
 
 			new_task.set_created_date(task_created_date);
-			
-
-			new_task.set_description(j1["Tasks"][task_name]["Description"]);
+            new_task.set_description(j1["Tasks"][task_name]["Description"]);
             new_task.set_id_number(j1["Tasks"][task_name]["ID"]);
 			new_task.set_status(j1["Tasks"][task_name]["Status"]);
             new_task.set_task_number(j1["Tasks"][task_name]["Task Number"]);
 
 			project_tasks.push_back(new_task);
 			task_name = "task";
-		
-
 	}
-
-
 
 	project_to_load.set_name(j1["Project"]["Name"]);
 	project_to_load.set_description(j1["Project"]["Description"]);
@@ -248,8 +234,24 @@ void load_json_project(Project& project_to_load,string projectName)//need better
 	project_to_load.set_tasks(project_tasks);
     project_to_load.set_current_ticket(j1["Project"]["Task Number"]);
 
+return project_to_load;
+}
+vector <Project> load_all_projects()
+{
+vector <Project> all_projects;
+Project loaded_project;
+QDirIterator jsonfile(QDir::currentPath(), QStringList() << "*.json", QDir::Files, QDirIterator::NoIteratorFlags);
+while (jsonfile.hasNext())
+{
+    jsonfile.next();
+    loaded_project=load_json_project(jsonfile.fileName().toStdString());
+    all_projects.push_back(loaded_project);
+}
+
+return all_projects;
 
 }
+
 void rename_project(string old_name, string new_name)
 {
 	string oldfilename = old_name + ".json";
@@ -281,7 +283,6 @@ void change_project_description(string project_name, string new_description)
 	jsonfile1.open(filename);
 	jsonfile1 << j1;
 	jsonfile1.close();
-
 
 }
 
@@ -360,6 +361,5 @@ void change_task_status(Project& project, int task_number, string new_status)
     jsonfile1.open(filename);
     jsonfile1 << j1;
     jsonfile1.close();
-
 
 }
