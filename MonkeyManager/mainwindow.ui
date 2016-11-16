@@ -1230,8 +1230,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>439</height>
+                <width>161</width>
+                <height>395</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -1265,13 +1265,13 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>166</width>
-                <height>439</height>
+                <width>161</width>
+                <height>395</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
                <item>
-                <layout class="QVBoxLayout" name="Doing_List"/>
+                <layout class="QVBoxLayout" name="Testing_List"/>
                </item>
                <item>
                 <spacer name="verticalSpacer_3">
@@ -1300,13 +1300,13 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>439</height>
+                <width>162</width>
+                <height>395</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
                <item>
-                <layout class="QVBoxLayout" name="Testing_List"/>
+                <layout class="QVBoxLayout" name="Doing_List"/>
                </item>
                <item>
                 <spacer name="verticalSpacer_2">
@@ -1335,8 +1335,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>439</height>
+                <width>161</width>
+                <height>395</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1397,7 +1397,7 @@ margin-right:4px;</string>
               </font>
              </property>
              <property name="text">
-              <string>Testing</string>
+              <string>Doing</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -1419,7 +1419,7 @@ margin-right:4px;</string>
               </font>
              </property>
              <property name="text">
-              <string>Doing</string>
+              <string>Testing</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignHCenter|Qt::AlignTop</set>
