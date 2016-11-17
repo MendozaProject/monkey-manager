@@ -10,6 +10,7 @@
 #include "json.hpp"
 void remove_json_project(string projectName);
 void create_json_project(Project newproject);
+void save_all_projects(vector <Project> projects);
 void remove_json_task(Project project, Task taskRemove);
 void add_json_task(Project project, Task new_task);
 Project load_json_project(string projectName);

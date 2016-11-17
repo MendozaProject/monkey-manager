@@ -18,8 +18,6 @@ using namespace std;
 
 using json = nlohmann::json;
 
-
-
 void remove_json_project(string projectName)
 {
 	string filename = projectName + ".json";
@@ -95,6 +93,15 @@ void create_json_project(Project newproject)
 	jsonfile.close();
 	
 }
+void save_all_projects(vector <Project> projects)
+{
+
+    for(int i=0;i<projects.size();i++)
+    {
+        create_json_project(projects[i]);
+    }
+}
+
 void remove_json_task(Project project, Task taskRemove)
 {
 	string taskName = taskRemove.get_name();
