@@ -42,7 +42,6 @@ bool ProjectListModel::addProject(Project &value, int role){
         QModelIndex topLeft = QAbstractItemModel::createIndex(0,0);
         QModelIndex bottomRight = QAbstractItemModel::createIndex((rowCount() - 1), 1);
         emit dataChanged(topLeft, bottomRight);
-        qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects().size()));
         return true;
     }
     return false;

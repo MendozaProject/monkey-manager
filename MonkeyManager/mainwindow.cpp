@@ -83,7 +83,6 @@ void MainWindow::onNewProjectButtonClick()
     qDebug() << "Main Window New Project Button";
     Project newProject("New Project", "");
     projectModel->addProject(newProject, Qt::EditRole);
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects().size()));
 }
 
 void MainWindow::onDeleteProjectButtonClick()
