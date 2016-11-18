@@ -42,6 +42,7 @@ void Project::remove_task(int index){
 }
 
 void Project::add_task(Task new_task){
+    new_task.set_task_number(assign_ticket());
     m_tasks.push_back(new_task);
     qDebug() << "From Project add task: " + QString::fromStdString(to_string(m_tasks.size()));
 }

@@ -41,6 +41,10 @@ private slots:
     void item_selected_in_list();
     void mousePressEvent(QMouseEvent *event);
 
+    void on_saveProjectsButton_clicked();
+
+    void on_saveCurrentProjectBotton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
