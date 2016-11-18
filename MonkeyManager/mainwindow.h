@@ -38,6 +38,7 @@ private slots:
     void onNewProjectButtonClick();
     void onDeleteProjectButtonClick();
     void onNewTaskButtonClicked();
+    void item_selected_in_list();
     void mousePressEvent(QMouseEvent *event);
 
 private:

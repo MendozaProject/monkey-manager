@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+    connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
 
@@ -121,4 +122,13 @@ void MainWindow::onTaskDialogAccepted()
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug() << "Main Window Mouse";
+
+}
+
+void MainWindow::item_selected_in_list(){
+    qDebug() << "Item Selected in QListView";
+    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+        return;
+    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects().at(projectListView->selectionModel()->selectedIndexes().first().row()));
+    qDebug() << QString::fromStdString(ProjectUtils::Instance()->get_open_project().get_name());
 }
