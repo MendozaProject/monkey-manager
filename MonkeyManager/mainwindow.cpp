@@ -47,6 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+    connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
 
@@ -58,10 +59,8 @@ void MainWindow::centerAndResize()
     QSize availableSize = qApp->desktop()->availableGeometry().size();
     int width = availableSize.width();
     int height = availableSize.height();
-    qDebug() << "Available dimensions " << width << "x" << height;
     width *= 0.85; // 90% of the screen size
     height *= 0.85; // 90% of the screen size
-    qDebug() << "Computed dimensions " << width << "x" << height;
     QSize newSize( width, height );
 
     setGeometry(
@@ -97,9 +96,10 @@ void MainWindow::onDeleteProjectButtonClick()
 void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << " Main Window Add New Task Button";
-    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
         return;
-
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
     taskDialog = new TaskDialog();
     taskDialog->show();
 }
@@ -116,12 +116,44 @@ void MainWindow::onTaskDialogAccepted()
         ui->Testing_List->addWidget(task);
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
-    qDebug() << "Main Window TASK ACCEPTED!!!!!";
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug() << "Main Window Mouse";
+}
+
+void MainWindow::item_selected_in_list(){
+    qDebug() << "Item Selected in QListView";
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
+        return;
+    ProjectUtils* instance = ProjectUtils::Instance();
+    instance->open_project(instance->get_projects().at(index.first().row()));
+    remove_all_widgets(toDoLayout);
+    remove_all_widgets(doingLayout);
+    remove_all_widgets(testingLayout);
+    remove_all_widgets(doneLayout);
+    vector<Task>& tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
+    for(int i = 0; i < tasks.size(); i++){
+        ProjectUtils::Instance()->open_task(tasks.at(i));
+        TaskWidget *task = new TaskWidget;
+        if(tasks.at(i).get_status() == "To Do")
+            ui->Todo_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Doing")
+            ui->Doing_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Testing")
+            ui->Testing_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Done")
+            ui->Done_List->addWidget(task);
+    }
+}
+
+void MainWindow::remove_all_widgets(QBoxLayout* layout){
+    QLayoutItem *child;
+    while ((child = layout->takeAt(0)) != 0) {
+        delete child->widget();
+        delete child;
+    }
 }
 
 void MainWindow::on_saveProjectsButton_clicked()

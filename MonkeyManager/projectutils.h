@@ -11,6 +11,7 @@ private:
     Project s_open_project;
     static ProjectUtils* m_pInstance;
     Task s_opened_task;
+    int current_project_index;
 
     ProjectUtils();
     ~ProjectUtils();
@@ -36,6 +37,9 @@ public:
     Task& get_open_task();
 
     string trim_string(string s);
+
+    int& get_current_project_index();
+    void set_current_project_index(int index);
 };
 
 #endif // PROJECTUTILS_H

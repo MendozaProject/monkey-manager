@@ -95,3 +95,11 @@ string ProjectUtils::trim_string(string s){
 
     return s.substr(i, j - i + 1);
 }
+
+int& ProjectUtils::get_current_project_index(){
+    return current_project_index;
+}
+
+void ProjectUtils::set_current_project_index(int index){
+    current_project_index = index;
+}

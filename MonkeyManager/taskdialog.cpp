@@ -17,7 +17,6 @@ TaskDialog::TaskDialog(QWidget *parent) :
     (ui->nameLineEdit)->setText(QString::fromUtf8(m_task.get_name().c_str()));
     (ui->descriptionTextEdit)->setText(QString::fromUtf8(m_task.get_description().c_str()));
     (ui->dateEdit)->setDate(m_task.get_due_date());
-    //connect(taskDialogAccept, SIGNAL(accepted()), m, SLOT(onTaskDialogAccepted()));
 }
 
 TaskDialog::~TaskDialog()
@@ -34,12 +33,10 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
     ProjectUtils::Instance()->get_open_project().add_task(m_task);
+    ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).add_task(m_task);
     ProjectUtils::Instance()->open_task(m_task);
 
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
-    qDebug() << "TaskDialog: accept slot";
     MainWindow::getInstance()->onTaskDialogAccepted();
-    //need to emit data changed possibly
 }
 
 Task TaskDialog::getTask(Task task)
