@@ -133,10 +133,10 @@ void MainWindow::item_selected_in_list(){
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
-    vector<Task>& tasks = ProjectUtils::Instance()->get_open_project().get_tasks();
+    vector<Task>& tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
     for(int i = 0; i < tasks.size(); i++){
-        TaskWidget *task = new TaskWidget;
         ProjectUtils::Instance()->open_task(tasks.at(i));
+        TaskWidget *task = new TaskWidget;
         if(tasks.at(i).get_status() == "To Do")
             ui->Todo_List->addWidget(task);
         else if(tasks.at(i).get_status() == "Doing")
