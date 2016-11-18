@@ -2,6 +2,7 @@
 #include <QString>
 #include <string>
 #include <projectutils.h>
+#include <QDebug>
 
 int ProjectListModel::rowCount(const QModelIndex& parent) const {
     return projectsList.size();

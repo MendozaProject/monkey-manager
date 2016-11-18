@@ -9,7 +9,7 @@
 class ProjectListModel : public QAbstractListModel{
     Q_OBJECT
 public:
-    explicit ProjectListModel(const vector<Project>& projects, QObject* parent = 0)
+    explicit ProjectListModel(vector<Project>& projects, QObject* parent = 0)
         :QAbstractListModel(parent), projectsList(projects){
     }
 
@@ -22,7 +22,7 @@ public:
     bool addProject(Project &value, int role = Qt::EditRole);
     bool deleteProject(QModelIndex &index, int role = Qt::EditRole);
 private:
-    vector<Project> projectsList;
+    vector<Project>& projectsList;
 };
 
 #endif // PROJECTLISTMODEL_H
