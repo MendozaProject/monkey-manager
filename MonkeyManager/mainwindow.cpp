@@ -6,6 +6,7 @@
 #include "taskwidget.h"
 #include "taskdialog.h"
 #include "project.h"
+#include "Json_utils.h"
 
 static MainWindow *s_pMainWindow = NULL;
 
@@ -121,4 +122,25 @@ void MainWindow::onTaskDialogAccepted()
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug() << "Main Window Mouse";
+}
+
+void MainWindow::on_saveProjectsButton_clicked()
+{
+    qDebug() << "Main Window Save All Button";
+    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects()[0].get_tasks().size()));
+    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
+
+    //save_all_projects(ProjectUtils::Instance()->get_projects());
+
+}
+
+void MainWindow::on_saveCurrentProjectBotton_clicked()
+{
+    qDebug() << "Main Window Save Button";
+    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+        return;
+    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_current_ticket()));
+    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[0].get_task_number()));
+    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[1].get_task_number()));
+    create_json_project(ProjectUtils::Instance()->get_open_project());
 }
