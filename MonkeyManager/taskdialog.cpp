@@ -39,7 +39,6 @@ void TaskDialog::on_buttonBox_accepted()
     qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
     qDebug() << "TaskDialog: accept slot";
     MainWindow::getInstance()->onTaskDialogAccepted();
-    //need to emit data changed possibly
 }
 
 Task TaskDialog::getTask(Task task)
