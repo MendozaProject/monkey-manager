@@ -59,10 +59,8 @@ void MainWindow::centerAndResize()
     QSize availableSize = qApp->desktop()->availableGeometry().size();
     int width = availableSize.width();
     int height = availableSize.height();
-    qDebug() << "Available dimensions " << width << "x" << height;
     width *= 0.85; // 90% of the screen size
     height *= 0.85; // 90% of the screen size
-    qDebug() << "Computed dimensions " << width << "x" << height;
     QSize newSize( width, height );
 
     setGeometry(
@@ -98,9 +96,10 @@ void MainWindow::onDeleteProjectButtonClick()
 void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << " Main Window Add New Task Button";
-    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
         return;
-
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
     taskDialog = new TaskDialog();
     taskDialog->show();
 }
@@ -117,9 +116,6 @@ void MainWindow::onTaskDialogAccepted()
         ui->Testing_List->addWidget(task);
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
-    qDebug() << "Main Window TASK ACCEPTED!!!!!";
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects().at(0).get_tasks().size()));
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
@@ -131,15 +127,13 @@ void MainWindow::item_selected_in_list(){
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
     if(index.isEmpty())
         return;
-    qDebug() << QString::fromStdString(to_string(index.first().row()));
     ProjectUtils* instance = ProjectUtils::Instance();
-    instance->open_project(instance->get_projects().at(index.first().row()), index.first().row());
+    instance->open_project(instance->get_projects().at(index.first().row()));
     remove_all_widgets(toDoLayout);
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
     vector<Task>& tasks = ProjectUtils::Instance()->get_open_project().get_tasks();
-    qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
     for(int i = 0; i < tasks.size(); i++){
         TaskWidget *task = new TaskWidget;
         ProjectUtils::Instance()->open_task(tasks.at(i));
@@ -157,7 +151,6 @@ void MainWindow::item_selected_in_list(){
 void MainWindow::remove_all_widgets(QBoxLayout* layout){
     QLayoutItem *child;
     while ((child = layout->takeAt(0)) != 0) {
-        qDebug() << child;
         delete child->widget();
         delete child;
     }
