@@ -67,6 +67,7 @@ bool ProjectListModel::setData(const QModelIndex &index, const QVariant &value, 
     string old_name= temp.get_name();
     if (!(value.toString().trimmed() == ""))
         temp.set_name(value.toString().trimmed().toStdString());
+    if(project_exists(old_name))
     rename_project(old_name, temp.get_name());
     return true;
 }
