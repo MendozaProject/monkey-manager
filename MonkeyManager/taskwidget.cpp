@@ -19,6 +19,10 @@ TaskWidget::TaskWidget(QWidget *parent) :
     name->setText(QString::fromStdString(temp_task.get_name()));
     date->setText(temp_task.get_due_date().toString("yyyy.MM.dd"));
 
+    widget_task_number=ProjectUtils::Instance()->get_open_project().assign_ticket();//so the
+    ProjectUtils::Instance()->get_open_project().set_current_ticket(widget_task_number);
+
+
     qDebug() << "From TaskWidget Creation: " + QString::fromStdString(temp_task.get_name()) ;
 
 }
@@ -26,4 +30,14 @@ TaskWidget::TaskWidget(QWidget *parent) :
 TaskWidget::~TaskWidget()
 {
     delete ui;
+}
+void TaskWidget::mousePressEvent(QMouseEvent * event)
+{
+   //qDebug() << "hey";
+   qDebug() << QString::fromStdString(to_string(widget_task_number));
+   //QString name2= name->text();
+    //int task_number = ui->date;
+   //qDebug() << name2;
+
+
 }

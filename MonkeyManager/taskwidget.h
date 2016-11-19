@@ -17,8 +17,10 @@ public:
     ~TaskWidget();
     QLabel *name;
     QLabel *date;
+    int widget_task_number;
 private:
     Ui::TaskWidget *ui;
+    void mousePressEvent(QMouseEvent * event);
 };
 
 #endif // TASKWIDGET_H
