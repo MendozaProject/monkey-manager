@@ -2,6 +2,7 @@
 #include <QString>
 #include <string>
 #include <projectutils.h>
+#include "Json_utils.h"
 #include <QDebug>
 
 int ProjectListModel::rowCount(const QModelIndex& parent) const {
@@ -63,7 +64,10 @@ bool ProjectListModel::setData(const QModelIndex &index, const QVariant &value, 
     if(role != Qt::EditRole)
         return false;
     Project &temp = projectsList[index.row()];
+    string old_name= temp.get_name();
     if (!(value.toString().trimmed() == ""))
         temp.set_name(value.toString().trimmed().toStdString());
+    if(project_exists(old_name))
+    rename_project(old_name, temp.get_name());
     return true;
 }

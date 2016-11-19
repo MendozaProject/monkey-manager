@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newProjectButton = ui->newProjectButton;
     deleteProjectButton= ui->deleteProjectButton;
 
+    ProjectUtils::Instance()->set_projects(load_all_projects());
     if (ProjectUtils::Instance()->get_projects().empty()){
         ProjectUtils::Instance()->add_project(Project());
     }
@@ -91,6 +92,7 @@ void MainWindow::onDeleteProjectButtonClick()
     if(projectListView->selectionModel()->selectedIndexes().isEmpty())
         return;
     projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
+    remove_json_project(ProjectUtils::Instance()->get_open_project().get_name());
 }
 
 void MainWindow::onNewTaskButtonClicked()
@@ -169,7 +171,7 @@ void MainWindow::on_saveProjectsButton_clicked()
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects()[0].get_tasks().size()));
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
 
-    //save_all_projects(ProjectUtils::Instance()->get_projects());
+    save_all_projects(ProjectUtils::Instance()->get_projects());
 
 }
 

@@ -258,6 +258,17 @@ while (jsonfile.hasNext())
 return all_projects;
 
 }
+bool project_exists(string name)
+{
+    string filename= name + ".json";
+  ifstream jsonfile(filename);
+  if(jsonfile)
+      return true;
+  else
+      return false;
+
+
+}
 
 void rename_project(string old_name, string new_name)
 {
