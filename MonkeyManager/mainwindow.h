@@ -27,6 +27,7 @@ public:
     void updateTaskInDoing();
     void updateTaskInTesting();
     void updateTaskInToDone();
+    void DisplayDetailedView(Task task);
 
     static MainWindow *getInstance();
 

@@ -1,6 +1,7 @@
 #ifndef TASKWIDGET_H
 #define TASKWIDGET_H
 
+#include "task.h"
 #include <QWidget>
 #include <QLabel>
 
@@ -20,7 +21,8 @@ public:
     int widget_task_number;
 private:
     Ui::TaskWidget *ui;
-    void mousePressEvent(QMouseEvent * event);
+    void mouseDoubleClickEvent(QMouseEvent * event);
+    Task temp_task;
 };
 
 #endif // TASKWIDGET_H

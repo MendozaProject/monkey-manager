@@ -736,8 +736,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>419</height>
+                <width>161</width>
+                <height>235</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -771,8 +771,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>419</height>
+                <width>161</width>
+                <height>235</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -806,8 +806,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>168</width>
-                <height>419</height>
+                <width>162</width>
+                <height>235</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -841,8 +841,8 @@ margin-right:4px;</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>419</height>
+                <width>161</width>
+                <height>235</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1087,9 +1087,9 @@ font-size:12pt;</string>
                 <property name="geometry">
                  <rect>
                   <x>0</x>
-                  <y>-26</y>
-                  <width>523</width>
-                  <height>126</height>
+                  <y>0</y>
+                  <width>517</width>
+                  <height>146</height>
                  </rect>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1112,6 +1112,9 @@ font-size:12pt;</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>
+                   </property>
+                   <property name="margin">
+                    <number>1</number>
                    </property>
                   </widget>
                  </item>

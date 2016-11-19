@@ -118,6 +118,13 @@ void MainWindow::onTaskDialogAccepted()
         ui->Done_List->addWidget(task);
 }
 
+void MainWindow::DisplayDetailedView(Task task) {
+    ui->taskName->setText(QString::fromStdString(task.get_name()));
+    ui->taskDueDate->setText(task.get_due_date().toString("yyyy.MM.dd"));
+    ui->taskCreatedDate->setText(task.get_created_date().toString("yyyy.MM.dd"));
+    ui->taskDescription->setText(QString::fromStdString(task.get_description()));
+}
+
 void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug() << "Main Window Mouse";
 }
