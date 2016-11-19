@@ -1,6 +1,6 @@
 #include "project.h"
 
-#include <QDebug>;
+#include <QDebug>
 
 Project::Project(){
     m_name = "New Project";

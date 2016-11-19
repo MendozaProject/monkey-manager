@@ -133,7 +133,7 @@ void MainWindow::item_selected_in_list(){
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
-    vector<Task>& tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
+    vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
     for(int i = 0; i < tasks.size(); i++){
         ProjectUtils::Instance()->open_task(tasks.at(i));
         TaskWidget *task = new TaskWidget;
