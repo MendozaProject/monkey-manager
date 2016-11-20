@@ -211,7 +211,10 @@ color:rgb(117, 117, 117);</string>
        <item>
         <widget class="QPushButton" name="newProjectButton">
          <property name="styleSheet">
-          <string notr="true">border:none;
+          <string notr="true">background-color: white;
+border-style: outset;
+border-width: 2px;
+border-color: gray;
 color:rgb(236, 77, 37);
 margin-right: 8px;
 margin-left: 4px;
@@ -695,7 +698,10 @@ margin-bottom: 8px;</string>
            <item>
             <widget class="QPushButton" name="newTaskButton">
              <property name="styleSheet">
-              <string notr="true">border:none;
+              <string notr="true">background-color: white;
+border-style: outset;
+border-width: 2px;
+border-color: gray;
 color:rgb(236, 77, 37);
 margin-left:4px;
 margin-right:4px;</string>
@@ -992,7 +998,7 @@ font-size:12pt;</string>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="editTaskButton">
                <property name="maximumSize">
                 <size>
                  <width>50</width>
@@ -1622,7 +1628,10 @@ color:rgb(255, 255, 255);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:none;
+          <string notr="true">background-color: black;
+border-style: outset;
+border-width: 2px;
+border-color: gray;
 color:rgb(255, 255, 255);
 margin-left:4px;
 margin-right:4px;</string>
@@ -1641,7 +1650,10 @@ margin-right:4px;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:none;
+          <string notr="true">background-color: black;
+border-style: outset;
+border-width: 2px;
+border-color: gray;
 color:rgb(255, 255, 255);
 margin-left:4px;
 margin-right:4px;</string>
@@ -1666,7 +1678,10 @@ margin-right:4px;</string>
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">border:none;
+          <string notr="true">background-color: black;
+border-style: outset;
+border-width: 2px;
+border-color: gray;
 color:rgb(255, 255, 255);
 margin-left:4px;
 margin-right:4px;</string>

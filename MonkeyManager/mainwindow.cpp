@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
+    editTaskButton = ui->editTaskButton;
 
     toDoLayout = ui->Todo_List;
     doingLayout = ui->Doing_List;
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+    connect(editTaskButton, SIGNAL(released()), this, SLOT(onEditTaskButtonClicked()));
     connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
@@ -104,6 +106,16 @@ void MainWindow::onNewTaskButtonClicked()
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     taskDialog = new TaskDialog();
     taskDialog->show();
+}
+
+void MainWindow::onEditTaskButtonClicked()
+{
+    qDebug() << " Main Window Edit Task Button";
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
+        return;
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    taskDialog = new TaskDialog();
 }
 
 void MainWindow::onTaskDialogAccepted()
