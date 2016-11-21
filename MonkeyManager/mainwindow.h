@@ -29,6 +29,9 @@ public:
     void updateTaskInToDone();
     void DisplayDetailedView(Task task);
 
+    bool getEditFlag();
+    void setEditFlag(bool);
+
     static MainWindow *getInstance();
 
 
@@ -58,6 +61,8 @@ private:
 
     QLabel *projectNameLabel;
     QFrame *toDoFrame;
+
+    bool editingTask;
 
     QListView *projectListView;
     ProjectListModel *projectModel;

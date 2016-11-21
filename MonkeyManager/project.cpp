@@ -7,6 +7,7 @@ Project::Project(){
     m_description = "Add description";
     m_created_date = QDate().currentDate();
     m_current_ticket = 0;
+    m_selected_ticket = m_current_ticket;
 }
 
 Project::Project(string name, string description){
@@ -14,13 +15,14 @@ Project::Project(string name, string description){
     m_description = description;
     m_created_date = QDate().currentDate();
     m_current_ticket = 0;
+    m_selected_ticket = m_current_ticket;
 }
 
 Project::~Project(){
 }
 
 // task management functions
-Task Project::find_task_by_name(string name){
+vector<Task>::iterator Project::find_task_by_name(string name){
     bool found = false;
     Task task = Task();
     for (m_tasks_iterator = m_tasks.begin(); m_tasks_iterator != m_tasks.end(); m_tasks_iterator++){
@@ -33,7 +35,7 @@ Task Project::find_task_by_name(string name){
     if (!found) {
         throw ERR_TASK_NOT_FOUND;
     }
-    return task;
+    return m_tasks_iterator;
 }
 
 void Project::remove_task(int index){
@@ -49,6 +51,19 @@ void Project::add_task(Task new_task){
 
 int Project::assign_ticket(){
     return m_current_ticket++;
+}
+
+void Project::editTask(string task_name, Task r_task)
+{
+    vector<Task>::iterator task = find_task_by_name(task_name);
+    //  ^^^ this is the kind of stuff we should be doing
+
+    task->set_name( r_task.get_name() );
+    task->set_due_date( r_task.get_due_date() );
+    task->set_created_date( r_task.get_created_date() );
+    task->set_description( r_task.get_description() );
+    task->set_status( r_task.get_status() );
+    task->set_id_number( r_task.get_id_number() );
 }
 
 // setter functions
@@ -70,6 +85,11 @@ void Project::set_tasks(vector<Task> tasks){
 void Project::set_current_ticket(int ticket_number)
 {
     m_current_ticket=ticket_number;
+}
+
+void Project::set_selected_ticket(int ticket_number)
+{
+    m_selected_ticket = ticket_number;
 }
 
 // getter functions
@@ -94,3 +114,9 @@ int Project::get_current_ticket()
 {
     return m_current_ticket;
 }
+
+int Project::get_selected_ticket()
+{
+    return m_selected_ticket;
+}
+

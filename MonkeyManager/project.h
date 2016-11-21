@@ -19,6 +19,7 @@ class Project {
         vector<Task> m_tasks;
         vector<Task>::iterator m_tasks_iterator;
         int m_current_ticket;
+        int m_selected_ticket;
     
     public:
         // constructors and destructors
@@ -27,10 +28,11 @@ class Project {
         ~Project();
         
         // task management functions
-        Task find_task_by_name(string name);
+        vector<Task>::iterator find_task_by_name(string name);
         void remove_task(int index);
         void add_task(Task new_task);
         int assign_ticket();
+        void editTask(string, Task);
         
         // setter functions
         void set_created_date(QDate created_date);
@@ -38,6 +40,7 @@ class Project {
         void set_description(string description);
         void set_tasks(vector<Task> tasks);
         void set_current_ticket(int ticket_number);
+        void set_selected_ticket(int);
         
         // getter functions
         QDate get_created_date();
@@ -45,6 +48,7 @@ class Project {
         string get_description();
         vector<Task> get_tasks();
         int get_current_ticket();
+        int get_selected_ticket();
 };
 
 #endif

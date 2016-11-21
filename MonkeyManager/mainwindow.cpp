@@ -104,6 +104,7 @@ void MainWindow::onNewTaskButtonClicked()
     if(index.isEmpty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    setEditFlag(false);
     taskDialog = new TaskDialog();
     taskDialog->show();
 }
@@ -115,7 +116,10 @@ void MainWindow::onEditTaskButtonClicked()
     if(index.isEmpty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    //ProjectUtils::Instance()->get_open_task();
+    setEditFlag(true);
     taskDialog = new TaskDialog();
+    taskDialog->show();
 }
 
 void MainWindow::onTaskDialogAccepted()
@@ -130,6 +134,11 @@ void MainWindow::onTaskDialogAccepted()
         ui->Testing_List->addWidget(task);
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
+
+    if( MainWindow::getInstance()->getEditFlag() ) {
+        // needs to remove the widget here
+        ;
+    }
 }
 
 void MainWindow::DisplayDetailedView(Task task) {
@@ -137,6 +146,16 @@ void MainWindow::DisplayDetailedView(Task task) {
     ui->taskDueDate->setText(task.get_due_date().toString("yyyy.MM.dd"));
     ui->taskCreatedDate->setText(task.get_created_date().toString("yyyy.MM.dd"));
     ui->taskDescription->setText(QString::fromStdString(task.get_description()));
+}
+
+bool MainWindow::getEditFlag()
+{
+    return editingTask;
+}
+
+void MainWindow::setEditFlag(bool f)
+{
+    editingTask = f;
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
