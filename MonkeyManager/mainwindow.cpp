@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QLabel>
+#include <QFontDatabase>
+#include <QFont>
 #include "taskwidget.h"
 #include "taskdialog.h"
 #include "project.h"
@@ -19,6 +21,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    load_fonts();
+
     s_pMainWindow = this;
     ui->setupUi(this);
     this->centerAndResize();
@@ -45,6 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     projectNameLabel = ui->projectNameLabel;
 
+    taskDescriptionWidget = ui->taskDescriptionWidget;
+    taskDescriptionWidget->hide();
+
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
@@ -53,7 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
-
 }
 
 void MainWindow::centerAndResize()
@@ -143,9 +149,10 @@ void MainWindow::onTaskDialogAccepted()
 
 void MainWindow::DisplayDetailedView(Task task) {
     ui->taskName->setText(QString::fromStdString(task.get_name()));
-    ui->taskDueDate->setText(task.get_due_date().toString("yyyy.MM.dd"));
-    ui->taskCreatedDate->setText(task.get_created_date().toString("yyyy.MM.dd"));
+    ui->taskDueDate->setText(task.get_due_date().toString("MM/dd/yyyy"));
+    ui->taskCreatedDate->setText(task.get_created_date().toString("MM/dd/yyyy"));
     ui->taskDescription->setText(QString::fromStdString(task.get_description()));
+    taskDescriptionWidget->show();
 }
 
 bool MainWindow::getEditFlag()
@@ -173,6 +180,10 @@ void MainWindow::item_selected_in_list(){
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
+
+    projectNameLabel->setText(QString::fromStdString(instance->get_open_project().get_name()));
+    taskDescriptionWidget->hide();
+
     vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
     for(int i = 0; i < tasks.size(); i++){
         ProjectUtils::Instance()->open_task(tasks.at(i));
@@ -215,4 +226,16 @@ void MainWindow::on_saveCurrentProjectBotton_clicked()
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[0].get_task_number()));
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[1].get_task_number()));
     create_json_project(ProjectUtils::Instance()->get_open_project());
+}
+
+void MainWindow::load_fonts(){
+    QFontDatabase database;
+    database.addApplicationFont(":/fonts/fonts/Roboto-Regular.ttf");
+    database.addApplicationFont(":/fonts/fonts/Roboto-Medium.ttf");
+    database.addApplicationFont(":/fonts/fonts/Roboto-Light.ttf");
+    database.addApplicationFont(":/fonts/fonts/Roboto-Bold.ttf");
+}
+
+void MainWindow::on_pushButton_2_clicked(){
+    taskDescriptionWidget->hide();
 }
