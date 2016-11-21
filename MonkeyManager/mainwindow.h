@@ -27,6 +27,7 @@ public:
     void updateTaskInDoing();
     void updateTaskInTesting();
     void updateTaskInToDone();
+    void update_ui();
     void DisplayDetailedView(Task task);
 
     bool getEditFlag();

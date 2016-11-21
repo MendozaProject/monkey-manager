@@ -32,6 +32,6 @@ TaskWidget::~TaskWidget()
 void TaskWidget::mouseDoubleClickEvent(QMouseEvent * event)
 {
    MainWindow::getInstance()->DisplayDetailedView(temp_task);
-   //ProjectUtils::Instance()->open_task(temp_task);
+   ProjectUtils::Instance()->open_task(temp_task);
    ProjectUtils::Instance()->get_open_project().set_selected_ticket( temp_task.get_task_number() );
 }
