@@ -18,7 +18,7 @@ TaskWidget::TaskWidget(QWidget *parent) :
 
     temp_task = ProjectUtils::Instance()->get_open_task();
     name->setText(QString::fromStdString(temp_task.get_name()));
-    date->setText(temp_task.get_due_date().toString("yyyy.MM.dd"));
+    date->setText(temp_task.get_due_date().toString("MM/dd/yyyy"));
     widget_task_number =ProjectUtils::Instance()->get_open_project().get_current_ticket();
     qDebug() << "From TaskWidget Creation: " + QString::fromStdString(temp_task.get_name()) ;
 

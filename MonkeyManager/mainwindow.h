@@ -47,7 +47,11 @@ private slots:
 
     void on_saveCurrentProjectBotton_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
+    void load_fonts();
+
     Ui::MainWindow *ui;
 
     QPushButton *newProjectButton;
@@ -67,6 +71,8 @@ private:
     QBoxLayout *doingLayout;
     QBoxLayout *doneLayout;
     QBoxLayout *testingLayout;
+
+    QWidget *taskDescriptionWidget;
 
     Project m_project;
 };

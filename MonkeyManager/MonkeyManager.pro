@@ -35,3 +35,6 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     taskwidget.ui \
     taskdialog.ui
+
+RESOURCES += \
+    resources.qrc
