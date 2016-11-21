@@ -242,3 +242,8 @@ void MainWindow::update_ui(){
             ui->Done_List->addWidget(task);
     }
 }
+
+void MainWindow::on_deleteTaskButton_clicked()
+{
+
+}

@@ -883,7 +883,43 @@ font-size: 20pt;</string>
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="deleteTaskButton">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color:rgb(129, 86, 0);
+font-family: &quot;Roboto&quot;;
+font-weight: 600;
+padding: 8;
+border-width: 2px;
+border-style: solid;
+border-color: rgb(129, 86, 0);
+margin-left: 4;
+margin-right: 4;</string>
+               </property>
+               <property name="text">
+                <string>DELETE</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="editTaskButton">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>80</width>
@@ -911,6 +947,12 @@ margin-right: 4;</string>
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_2">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>80</width>

@@ -54,6 +54,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_deleteTaskButton_clicked();
+
 private:
     void load_fonts();
 
