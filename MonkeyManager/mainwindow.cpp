@@ -142,8 +142,7 @@ void MainWindow::onTaskDialogAccepted()
         ui->Done_List->addWidget(task);
 
     if( MainWindow::getInstance()->getEditFlag() ) {
-        // needs to remove the widget here
-        ;
+        update_ui();
     }
 }
 
