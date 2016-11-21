@@ -883,7 +883,7 @@ font-size: 20pt;</string>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="editTaskButton">
                <property name="maximumSize">
                 <size>
                  <width>80</width>

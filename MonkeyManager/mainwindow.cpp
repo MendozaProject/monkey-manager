@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
+    editTaskButton = ui->editTaskButton;
 
     toDoLayout = ui->Todo_List;
     doingLayout = ui->Doing_List;
@@ -55,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
+    connect(editTaskButton, SIGNAL(released()), this, SLOT(onEditTaskButtonClicked()));
     connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
@@ -108,6 +110,20 @@ void MainWindow::onNewTaskButtonClicked()
     if(index.isEmpty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    setEditFlag(false);
+    taskDialog = new TaskDialog();
+    taskDialog->show();
+}
+
+void MainWindow::onEditTaskButtonClicked()
+{
+    qDebug() << " Main Window Edit Task Button";
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
+        return;
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    //ProjectUtils::Instance()->get_open_task();
+    setEditFlag(true);
     taskDialog = new TaskDialog();
     taskDialog->show();
 }
@@ -124,6 +140,11 @@ void MainWindow::onTaskDialogAccepted()
         ui->Testing_List->addWidget(task);
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
+
+    if( MainWindow::getInstance()->getEditFlag() ) {
+        // needs to remove the widget here
+        ;
+    }
 }
 
 void MainWindow::DisplayDetailedView(Task task) {
@@ -132,6 +153,16 @@ void MainWindow::DisplayDetailedView(Task task) {
     ui->taskCreatedDate->setText(task.get_created_date().toString("MM/dd/yyyy"));
     ui->taskDescription->setText(QString::fromStdString(task.get_description()));
     taskDescriptionWidget->show();
+}
+
+bool MainWindow::getEditFlag()
+{
+    return editingTask;
+}
+
+void MainWindow::setEditFlag(bool f)
+{
+    editingTask = f;
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
