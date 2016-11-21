@@ -171,32 +171,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
 
 void MainWindow::item_selected_in_list(){
     qDebug() << "Item Selected in QListView";
-    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
-        return;
-    ProjectUtils* instance = ProjectUtils::Instance();
-    instance->open_project(instance->get_projects().at(index.first().row()));
-    remove_all_widgets(toDoLayout);
-    remove_all_widgets(doingLayout);
-    remove_all_widgets(testingLayout);
-    remove_all_widgets(doneLayout);
-
-    projectNameLabel->setText(QString::fromStdString(instance->get_open_project().get_name()));
-    taskDescriptionWidget->hide();
-
-    vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
-    for(int i = 0; i < tasks.size(); i++){
-        ProjectUtils::Instance()->open_task(tasks.at(i));
-        TaskWidget *task = new TaskWidget;
-        if(tasks.at(i).get_status() == "To Do")
-            ui->Todo_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Doing")
-            ui->Doing_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Testing")
-            ui->Testing_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Done")
-            ui->Done_List->addWidget(task);
-    }
+    update_ui();
 }
 
 void MainWindow::remove_all_widgets(QBoxLayout* layout){
@@ -238,4 +213,33 @@ void MainWindow::load_fonts(){
 
 void MainWindow::on_pushButton_2_clicked(){
     taskDescriptionWidget->hide();
+}
+
+void MainWindow::update_ui(){
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
+        return;
+    ProjectUtils* instance = ProjectUtils::Instance();
+    instance->open_project(instance->get_projects().at(index.first().row()));
+    remove_all_widgets(toDoLayout);
+    remove_all_widgets(doingLayout);
+    remove_all_widgets(testingLayout);
+    remove_all_widgets(doneLayout);
+
+    projectNameLabel->setText(QString::fromStdString(instance->get_open_project().get_name()));
+    taskDescriptionWidget->hide();
+
+    vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
+    for(int i = 0; i < tasks.size(); i++){
+        ProjectUtils::Instance()->open_task(tasks.at(i));
+        TaskWidget *task = new TaskWidget;
+        if(tasks.at(i).get_status() == "To Do")
+            ui->Todo_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Doing")
+            ui->Doing_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Testing")
+            ui->Testing_List->addWidget(task);
+        else if(tasks.at(i).get_status() == "Done")
+            ui->Done_List->addWidget(task);
+    }
 }
