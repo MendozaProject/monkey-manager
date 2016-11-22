@@ -47,14 +47,10 @@ private slots:
     void item_selected_in_list();
     void remove_all_widgets(QBoxLayout* layout);
     void mousePressEvent(QMouseEvent *event);
-
     void on_saveProjectsButton_clicked();
-
     void on_saveCurrentProjectBotton_clicked();
-
     void on_pushButton_2_clicked();
-
-    void on_deleteTaskButton_clicked();
+    void onDeleteTaskButtonClicked();
 
 private:
     void load_fonts();
@@ -65,6 +61,7 @@ private:
     QPushButton *deleteProjectButton;
     QPushButton *newTaskButton;
     QPushButton *editTaskButton;
+    QPushButton *deleteTaskButton;
 
     QLabel *projectNameLabel;
     QFrame *toDoFrame;

@@ -29,7 +29,7 @@ class Project {
         
         // task management functions
         vector<Task>::iterator find_task_by_name(string name);
-        void remove_task(int index);
+        void remove_task(vector<Task>::iterator index);
         void add_task(Task new_task);
         int assign_ticket();
         void editTask(string, Task);
