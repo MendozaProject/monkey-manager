@@ -102,7 +102,7 @@ void MainWindow::onDeleteProjectButtonClick()
 {
     qDebug() << "Main Window Delete Project Button";
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
@@ -114,7 +114,7 @@ void MainWindow::onNewTaskButtonClicked()
 {
     qDebug() << " Main Window Add New Task Button";
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     setEditFlag(false);
@@ -126,7 +126,7 @@ void MainWindow::onEditTaskButtonClicked()
 {
     qDebug() << " Main Window Edit Task Button";
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     //ProjectUtils::Instance()->get_open_task();
@@ -139,7 +139,7 @@ void MainWindow::onDeleteTaskButtonClicked()
 {
     qDebug() << " Main Window Delete Task Button";
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
@@ -203,6 +203,8 @@ void MainWindow::remove_all_widgets(QBoxLayout* layout){
 void MainWindow::on_saveProjectsButton_clicked()
 {
     qDebug() << "Main Window Save All Button";
+    if(ProjectUtils::Instance()->get_projects().empty())
+        return;
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects()[0].get_tasks().size()));
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
     save_all_projects(ProjectUtils::Instance()->get_projects());
@@ -212,7 +214,7 @@ void MainWindow::on_saveCurrentProjectBotton_clicked()
 {
     qDebug() << "Main Window Save Button";
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     create_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()));
@@ -232,7 +234,7 @@ void MainWindow::on_pushButton_2_clicked(){
 
 void MainWindow::update_ui(){
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(index.isEmpty())
+    if(ProjectUtils::Instance()->get_projects().empty())
         return;
     remove_all_widgets(toDoLayout);
     remove_all_widgets(doingLayout);
