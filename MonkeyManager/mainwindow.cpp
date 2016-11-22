@@ -11,7 +11,6 @@
 #include "Json_utils.h"
 
 static MainWindow *s_pMainWindow = NULL;
-bool test = true;
 
 MainWindow *MainWindow::getInstance()
 {
@@ -133,19 +132,16 @@ void MainWindow::onEditTaskButtonClicked()
 
 void MainWindow::onDeleteTaskButtonClicked()
 {
-    if(test) {
-        qDebug() << " Main Window Delete Task Button";
-        QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-        if(index.isEmpty())
-            return;
-        ProjectUtils::Instance()->set_current_project_index(index.first().row());
-        string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
-        vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_projects().at(index.first().row()).find_task_by_name(temp_name);
-        ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks().erase(temp_index);
+    qDebug() << " Main Window Delete Task Button";
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
+        return;
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
+    vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_projects().at(index.first().row()).find_task_by_name(temp_name);
+    ProjectUtils::Instance()->get_projects().at(index.first().row()).remove_task(temp_index);
 
-        update_ui();
-        test = false;
-    }
+    update_ui();
 }
 
 void MainWindow::onTaskDialogAccepted()

@@ -35,13 +35,11 @@ void ProjectUtils::remove_project(string name){
 
 vector<Project>::iterator ProjectUtils::find_project_by_name(string name){
     bool found = false;
-    //Project* proj;
     for (s_projects_iterator = s_projects.begin();
             s_projects_iterator != s_projects.end();
             s_projects_iterator++){
         if ((*s_projects_iterator).get_name() == name){
             found = true;
-            //proj = *s_projects_iterator;
             break;
         }
     }
@@ -50,10 +48,6 @@ vector<Project>::iterator ProjectUtils::find_project_by_name(string name){
     }
     return s_projects_iterator;
 }
-
-//void ProjectUtils::open_project(Project project) {
-//    s_open_project = project;
-//}
 
 void ProjectUtils::open_project(string name){
     s_open_project = *find_project_by_name(name);
@@ -70,7 +64,6 @@ void ProjectUtils::set_projects(vector<Project> projects){
 vector<Project>& ProjectUtils::get_projects(){
     return s_projects;
 }
-
 
 void ProjectUtils::open_task(Task& task){
     s_opened_task = task;
@@ -103,3 +96,4 @@ int& ProjectUtils::get_current_project_index(){
 void ProjectUtils::set_current_project_index(int index){
     current_project_index = index;
 }
+
