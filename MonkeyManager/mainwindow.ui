@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Monkey Manager</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="font">
@@ -23,13 +23,13 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">.QWidget {
+    <string notr="true">QWidget {
 	font-family: &quot;Roboto&quot;;
 }
-.QLabel {
+QLabel {
 	font-family: &quot;Roboto&quot;;
 }
-.QPushButton {
+QPushButton {
 	font-family: &quot;Roboto&quot;;
 	font-weight: 600;
 	border-radius: 3px;
@@ -167,10 +167,11 @@
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">.QFrame{
+       <string notr="true">QFrame{
 	background:rgb(244, 244, 244);
-	border-color: red;
-	border-right-width: 2;
+	border-color: rgb(230, 230, 230);
+	border-right-width: 1;
+	border-style: solid;
 }
 .QListView{
 	background:rgb(244, 244, 244);
@@ -712,7 +713,7 @@ color: white;</string>
 }
 QWidget#horizontalWidget{
 	border-color: rgb(223, 80, 2);
-	border-bottom-width: 3;
+	border-bottom-width: 0;
 	border-style: solid;
 }
  .QPushButton:hover {
@@ -728,11 +729,34 @@ QWidget#horizontalWidget{
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <property name="leftMargin">
-        <number>16</number>
+        <number>9</number>
        </property>
        <property name="rightMargin">
         <number>16</number>
        </property>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="styleSheet">
+          <string notr="true">font-size: 18pt;
+font-weight: 500;
+padding: 0;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/icons/icons/ic_menu_white_24dp_1x.png</normalon>
+          </iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="projectNameLabel">
          <property name="minimumSize">
@@ -745,12 +769,16 @@ QWidget#horizontalWidget{
           <font>
            <family>Roboto</family>
            <pointsize>14</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true">color:rgb(255, 255, 255);
 font-family: &quot;Roboto&quot;;
-font-size: 14pt;</string>
+font-size: 14pt;
+font-weight: 600;
+margin-bottom: 2;</string>
          </property>
          <property name="text">
           <string>No Project Selected</string>
@@ -788,6 +816,16 @@ font-size: 14pt;</string>
          <property name="text">
           <string>SAVE PROJECT</string>
          </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/icons/ic_save_white_24dp_1x.png</normaloff>:/icons/icons/ic_save_white_24dp_1x.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
@@ -807,6 +845,16 @@ font-size: 14pt;</string>
          </property>
          <property name="text">
           <string>SAVE ALL</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/icons/ic_save_white_24dp_1x.png</normaloff>:/icons/icons/ic_save_white_24dp_1x.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
          <property name="checkable">
           <bool>false</bool>
@@ -830,6 +878,16 @@ font-size: 14pt;</string>
          </property>
          <property name="text">
           <string>DELETE PROJECT</string>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/icons/icons/ic_delete_white_24dp_1x.png</normaloff>:/icons/icons/ic_delete_white_24dp_1x.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
          <property name="checkable">
           <bool>false</bool>
@@ -1671,7 +1729,7 @@ font-weight:200;</string>
 	background-color:rgb(255, 170, 0);
 }
 QWidget#taskDescriptionWidget {
-	border-bottom-width: 3px;
+	border-bottom-width: 0;
     border-style: solid;
     border-color: rgb(229, 153, 0);
 }
@@ -1995,6 +2053,8 @@ font-size: 8pt;</string>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

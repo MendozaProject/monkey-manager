@@ -262,3 +262,12 @@ void MainWindow::update_ui(){
 }
 
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    if (ui->frame->isHidden()){
+        ui->frame->show();
+    } else {
+        ui->frame->hide();
+    }
+}

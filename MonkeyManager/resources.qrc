@@ -19,4 +19,14 @@
         <file>fonts/RobotoCondensed-LightItalic.ttf</file>
         <file>fonts/RobotoCondensed-Regular.ttf</file>
     </qresource>
+    <qresource prefix="/icons">
+        <file>icons/ic_menu_white_24dp_1x.png</file>
+        <file>icons/ic_add_white_24dp_1x.png</file>
+        <file>icons/ic_close_black_24dp_1x.png</file>
+        <file>icons/ic_delete_black_24dp_1x.png</file>
+        <file>icons/ic_delete_forever_white_24dp_1x.png</file>
+        <file>icons/ic_delete_white_24dp_1x.png</file>
+        <file>icons/ic_edit_black_24dp_1x.png</file>
+        <file>icons/ic_save_white_24dp_1x.png</file>
+    </qresource>
 </RCC>
