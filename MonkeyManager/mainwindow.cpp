@@ -99,10 +99,13 @@ void MainWindow::onNewProjectButtonClick()
 void MainWindow::onDeleteProjectButtonClick()
 {
     qDebug() << "Main Window Delete Project Button";
-    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
         return;
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
     projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
-    remove_json_project(ProjectUtils::Instance()->get_open_project().get_name());
+
 }
 
 void MainWindow::onNewTaskButtonClicked()
@@ -208,12 +211,11 @@ void MainWindow::on_saveProjectsButton_clicked()
 void MainWindow::on_saveCurrentProjectBotton_clicked()
 {
     qDebug() << "Main Window Save Button";
-    if(projectListView->selectionModel()->selectedIndexes().isEmpty())
+    QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+    if(index.isEmpty())
         return;
-    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_current_ticket()));
-    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[0].get_task_number()));
-    //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks()[1].get_task_number()));
-    create_json_project(ProjectUtils::Instance()->get_open_project());
+    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    create_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()));
 }
 
 void MainWindow::load_fonts(){
