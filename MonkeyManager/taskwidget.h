@@ -21,7 +21,7 @@ public:
     int widget_task_number;
 private:
     Ui::TaskWidget *ui;
-    void mouseDoubleClickEvent(QMouseEvent * event);
+    void mousePressEvent(QMouseEvent * event);
     Task temp_task;
 };
 

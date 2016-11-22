@@ -3,13 +3,14 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QLabel>
+#include <QPalette>
 #include <QFontDatabase>
 #include <QFont>
+#include <QPushButton>
 #include "taskwidget.h"
 #include "taskdialog.h"
 #include "project.h"
 #include "Json_utils.h"
-
 static MainWindow *s_pMainWindow = NULL;
 
 MainWindow *MainWindow::getInstance()
@@ -39,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     projectListView = ui->projectsList;
     projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
+
     newTaskButton = ui->newTaskButton;
     editTaskButton = ui->editTaskButton;
 
@@ -58,8 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
     connect(editTaskButton, SIGNAL(released()), this, SLOT(onEditTaskButtonClicked()));
     connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
-
-    projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
 }
 
 void MainWindow::centerAndResize()
@@ -186,9 +186,7 @@ void MainWindow::on_saveProjectsButton_clicked()
     qDebug() << "Main Window Save All Button";
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_projects()[0].get_tasks().size()));
     //qDebug() << QString::fromStdString(to_string(ProjectUtils::Instance()->get_open_project().get_tasks().size()));
-
     save_all_projects(ProjectUtils::Instance()->get_projects());
-
 }
 
 void MainWindow::on_saveCurrentProjectBotton_clicked()
