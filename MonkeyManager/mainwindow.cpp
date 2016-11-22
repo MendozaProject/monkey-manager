@@ -11,6 +11,7 @@
 #include "Json_utils.h"
 
 static MainWindow *s_pMainWindow = NULL;
+bool test = true;
 
 MainWindow *MainWindow::getInstance()
 {
@@ -41,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     projectListView->setModel(projectModel);
     newTaskButton = ui->newTaskButton;
     editTaskButton = ui->editTaskButton;
+    deleteTaskButton = ui->deleteTaskButton;
 
     toDoLayout = ui->Todo_List;
     doingLayout = ui->Doing_List;
@@ -58,6 +60,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(newTaskButton, SIGNAL(released()), this, SLOT(onNewTaskButtonClicked()));
     connect(editTaskButton, SIGNAL(released()), this, SLOT(onEditTaskButtonClicked()));
     connect(projectListView, SIGNAL(pressed(QModelIndex)), this, SLOT(item_selected_in_list()));
+    connect(deleteTaskButton, SIGNAL(released()), this, SLOT(onDeleteTaskButtonClicked()));
 
     projectNameLabel->setText(QString::fromStdString(m_project.get_name()));
 }
@@ -128,6 +131,23 @@ void MainWindow::onEditTaskButtonClicked()
     taskDialog->show();
 }
 
+void MainWindow::onDeleteTaskButtonClicked()
+{
+    if(test) {
+        qDebug() << " Main Window Delete Task Button";
+        QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
+        if(index.isEmpty())
+            return;
+        ProjectUtils::Instance()->set_current_project_index(index.first().row());
+        string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
+        vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_open_project().find_task_by_name(temp_name);
+        ProjectUtils::Instance()->get_open_project().remove_task(temp_index);
+
+        update_ui();
+        test = false;
+    }
+}
+
 void MainWindow::onTaskDialogAccepted()
 {
     TaskWidget *task = new TaskWidget;
@@ -141,9 +161,7 @@ void MainWindow::onTaskDialogAccepted()
     else if(current.get_status() == "Done")
         ui->Done_List->addWidget(task);
 
-    if( MainWindow::getInstance()->getEditFlag() ) {
-        update_ui();
-    }
+    update_ui();
 }
 
 void MainWindow::DisplayDetailedView(Task task) {
@@ -218,32 +236,29 @@ void MainWindow::update_ui(){
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
     if(index.isEmpty())
         return;
-    ProjectUtils* instance = ProjectUtils::Instance();
-    instance->open_project(instance->get_projects().at(index.first().row()));
     remove_all_widgets(toDoLayout);
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
 
-    projectNameLabel->setText(QString::fromStdString(instance->get_open_project().get_name()));
+    projectNameLabel->setText(QString::fromStdString(ProjectUtils::Instance()->get_open_project().get_name()));
     taskDescriptionWidget->hide();
 
     vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
-    for(int i = 0; i < tasks.size(); i++){
-        ProjectUtils::Instance()->open_task(tasks.at(i));
-        TaskWidget *task = new TaskWidget;
-        if(tasks.at(i).get_status() == "To Do")
-            ui->Todo_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Doing")
-            ui->Doing_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Testing")
-            ui->Testing_List->addWidget(task);
-        else if(tasks.at(i).get_status() == "Done")
-            ui->Done_List->addWidget(task);
+    if(!tasks.empty()) {
+        for(int i = 0; i < tasks.size(); i++){
+            ProjectUtils::Instance()->open_task(tasks.at(i));
+            TaskWidget *task = new TaskWidget;
+            if(tasks.at(i).get_status() == "To Do")
+                ui->Todo_List->addWidget(task);
+            else if(tasks.at(i).get_status() == "Doing")
+                ui->Doing_List->addWidget(task);
+            else if(tasks.at(i).get_status() == "Testing")
+                ui->Testing_List->addWidget(task);
+            else if(tasks.at(i).get_status() == "Done")
+                ui->Done_List->addWidget(task);
+        }
     }
 }
 
-void MainWindow::on_deleteTaskButton_clicked()
-{
 
-}

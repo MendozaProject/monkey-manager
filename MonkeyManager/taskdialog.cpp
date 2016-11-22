@@ -35,7 +35,7 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
-    if( MainWindow::getInstance()->getEditFlag() ) {
+    if( MainWindow::getInstance()->getEditFlag() && !(ProjectUtils::Instance()->get_open_project().get_tasks().empty()) ) {
         ProjectUtils::Instance()->get_open_project().editTask(ProjectUtils::Instance()->get_open_task().get_name(), m_task);
         ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).editTask(ProjectUtils::Instance()->get_open_task().get_name(), m_task);
     }
@@ -45,8 +45,6 @@ void TaskDialog::on_buttonBox_accepted()
     }
 
     ProjectUtils::Instance()->open_task(m_task);
-    // ^^^ Needs to get passed the actual task from the
-    //      vector, not m_task
 
     MainWindow::getInstance()->onTaskDialogAccepted();
 }

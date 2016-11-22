@@ -33,30 +33,30 @@ void ProjectUtils::remove_project(string name){
     }
 }
 
-Project ProjectUtils::find_project_by_name(string name){
+vector<Project>::iterator ProjectUtils::find_project_by_name(string name){
     bool found = false;
-    Project proj;
+    //Project* proj;
     for (s_projects_iterator = s_projects.begin();
             s_projects_iterator != s_projects.end();
             s_projects_iterator++){
         if ((*s_projects_iterator).get_name() == name){
             found = true;
-            proj = *s_projects_iterator;
+            //proj = *s_projects_iterator;
             break;
         }
     }
     if (!found) {
         throw ERR_PROJECT_NOT_FOUND;
     }
-    return proj;
+    return s_projects_iterator;
 }
 
-void ProjectUtils::open_project(Project project) {
-    s_open_project = project;
-}
+//void ProjectUtils::open_project(Project project) {
+//    s_open_project = project;
+//}
 
 void ProjectUtils::open_project(string name){
-    s_open_project = find_project_by_name(name);
+    s_open_project = *find_project_by_name(name);
 }
 
 Project& ProjectUtils::get_open_project(){

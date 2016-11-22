@@ -22,9 +22,9 @@ public:
     void add_project(Project project);
     void remove_project(string name);
 
-    Project find_project_by_name(string name);
+    vector<Project>::iterator find_project_by_name(string name);
 
-    void open_project(Project project);
+    //void open_project(Project project);
     void open_project(string name);
     Project& get_open_project();
 

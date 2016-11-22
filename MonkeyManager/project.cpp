@@ -24,11 +24,10 @@ Project::~Project(){
 // task management functions
 vector<Task>::iterator Project::find_task_by_name(string name){
     bool found = false;
-    Task task = Task();
+    //Task* task;// = Task();
     for (m_tasks_iterator = m_tasks.begin(); m_tasks_iterator != m_tasks.end(); m_tasks_iterator++){
         if ((*m_tasks_iterator).get_name() == name){
             found = true;
-            task = *m_tasks_iterator;
             break;
         }
     }
@@ -38,9 +37,9 @@ vector<Task>::iterator Project::find_task_by_name(string name){
     return m_tasks_iterator;
 }
 
-void Project::remove_task(int index){
-    m_tasks_iterator = m_tasks.begin() + index;
-    m_tasks.erase(m_tasks_iterator);
+void Project::remove_task(vector<Task>::iterator index) {
+    //m_tasks_iterator = m_tasks.begin() + index;
+    m_tasks.erase(index);
 }
 
 void Project::add_task(Task new_task){
