@@ -140,8 +140,8 @@ void MainWindow::onDeleteTaskButtonClicked()
             return;
         ProjectUtils::Instance()->set_current_project_index(index.first().row());
         string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
-        vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_open_project().find_task_by_name(temp_name);
-        ProjectUtils::Instance()->get_open_project().remove_task(temp_index);
+        vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_projects().at(index.first().row()).find_task_by_name(temp_name);
+        ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks().erase(temp_index);
 
         update_ui();
         test = false;
