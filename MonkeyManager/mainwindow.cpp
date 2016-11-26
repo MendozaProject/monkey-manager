@@ -107,7 +107,7 @@ void MainWindow::onDeleteProjectButtonClick()
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
     projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
-
+    update_ui();
 }
 
 void MainWindow::onNewTaskButtonClicked()
@@ -234,12 +234,12 @@ void MainWindow::on_pushButton_2_clicked(){
 
 void MainWindow::update_ui(){
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
-        return;
     remove_all_widgets(toDoLayout);
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
+    if(ProjectUtils::Instance()->get_projects().empty())
+        return;
 
     projectNameLabel->setText(QString::fromStdString(ProjectUtils::Instance()->get_open_project().get_name()));
     taskDescriptionWidget->hide();
