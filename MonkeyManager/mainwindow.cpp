@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
     projectListView = ui->projectsList;
     projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
     projectListView->setModel(projectModel);
+    projectListView->setCurrentIndex(projectModel->index(0,0));
 
     newTaskButton = ui->newTaskButton;
     editTaskButton = ui->editTaskButton;
