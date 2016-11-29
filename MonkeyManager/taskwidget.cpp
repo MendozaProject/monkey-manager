@@ -28,7 +28,11 @@ TaskWidget::~TaskWidget()
 {
     delete ui;
 }
-
+/*
+*@brif Displays the open task as a detailed view.
+*
+*@Param QMouseEven * event: Mouse click
+*/
 void TaskWidget::mousePressEvent(QMouseEvent * event)
 {
     MainWindow::getInstance()->DisplayDetailedView(temp_task);
