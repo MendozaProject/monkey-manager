@@ -1,28 +1,21 @@
-#include <QDate>
-#include <QDebug>
-#include <QFileInfo>
-#include <QDirIterator>
-#include "project.h"
-#include "task.h"
-#include "projectutils.h"
-
-#include "json.hpp"
-
-#include <string>
-#include <iostream>
-#include <stdio.h>
-#include <vector>
-#include <fstream>
+#include json_utils.h
 
 using namespace std;
 
 using json = nlohmann::json;
-
+/**
+ * @brief remove_json_project, deletes json project from computer
+ * @param projectName, string of project name that you want to remove
+ */
 void remove_json_project(string projectName)
 {
 	string filename = projectName + ".json";
     remove(filename.c_str());
 }
+/**
+ * @brief create_json_project, Creates a json project
+ * @param newproject, the project that you want to create a json for
+ */
 void create_json_project(Project newproject)
 {
     int number_task = newproject.get_current_ticket();
@@ -93,6 +86,10 @@ void create_json_project(Project newproject)
 	jsonfile.close();
 	
 }
+/**
+ * @brief save_all_projects, saves all of the current projects in singleton
+ * @param projects, send singleton of projects
+ */
 void save_all_projects(vector <Project> projects)
 {
 
@@ -101,86 +98,12 @@ void save_all_projects(vector <Project> projects)
         create_json_project(projects[i]);
     }
 }
-
-void remove_json_task(Project project, Task taskRemove)
-{
-	string taskName = taskRemove.get_name();
-	string task_name = "task";
-    int task_number = taskRemove.get_task_number();
-	json j1;
-	string task_name1;
-	string project_name = project.get_name();
-	ifstream jsonfile(project_name + ".json");
-	jsonfile >> j1;
-	jsonfile.close();
-	
-    task_name += to_string(task_number);
-    j1["Tasks"].erase(task_name);
-
-    for (int i=0; i < j1["Tasks"]["Task List"].size(); i++)//find task number in list
-        {
-            if (j1["Tasks"]["Task List"][i] == task_name)
-            {j1["Tasks"]["Task List"].erase(i);
-                break;
-            }
-        }
-
-	string filename = project_name + ".json";
-	ofstream jsonfile1;
-	jsonfile1.open(filename);
-	jsonfile1 << j1;
-	jsonfile1.close();
-
-}
-void add_json_task(Project project, Task new_task)
-{
-	string project_name = project.get_name();
-	
-	json j1;
-	
-	ifstream jsonfile(project_name + ".json");
-	jsonfile >> j1;
-	jsonfile.close();
-
-   int task_number = new_task.get_task_number();
-   string task_name = "task" + to_string(task_number);
-
-   QDate task_due = new_task.get_due_date();
-   QDate task_date = new_task.get_created_date();
-   int day = task_due.day();
-   int month = task_due.month();
-   int year = task_due.year();
-   int day2 = task_date.day();
-   int month2 = task_date.month();
-   int year2 = task_date.year();
-
-   j1["Tasks"]["Task List"][j1["Tasks"]["Task List"].size()]=task_name;
-   j1["Tasks"][task_name] = {
-	   { "Name", new_task.get_name() },
-	   { "Due Date",{
-		   { "Day",day },
-		   { "Month",month },
-           { "Year",year }
-       } },
-	   { "Created Date",{
-		   { "Day", day2 },
-		   { "Month", month2 },
-           { "Year", year2 }
-       } },
-	   { "Description", new_task.get_description() },
-	   { "ID", new_task.get_id_number() },
-       { "Status", new_task .get_status()},
-       {"Task Number", new_task.get_task_number()}
-   };
-
-   string filename = project_name + ".json";
-   ofstream jsonfile1;
-   jsonfile1.open(filename);
-   jsonfile1 << j1;
-   jsonfile1.close();
-
-}
-Project load_json_project(string projectName)//need better way to get task names
+/**
+ * @brief load_json_project, loads the json project
+ * @param projectName, send string of project name
+ * @return, retunrs project of given string name
+ */
+Project load_json_project(string projectName)
 {
     Project project_to_load;
 	json j1;
@@ -243,6 +166,10 @@ Project load_json_project(string projectName)//need better way to get task names
 
 return project_to_load;
 }
+/**
+ * @brief load_all_projects, loads all json projects on computer
+ * @return, returns vector of projects
+ */
 vector <Project> load_all_projects()
 {
 vector <Project> all_projects;
@@ -258,6 +185,11 @@ while (jsonfile.hasNext())
 return all_projects;
 
 }
+/**
+ * @brief project_exists, checks if project exists
+ * @param name, string of the project name that you want to check
+ * @return, returns true if project exists, false if not
+ */
 bool project_exists(string name)
 {
     string filename= name + ".json";
@@ -269,7 +201,11 @@ bool project_exists(string name)
 
 
 }
-
+/**
+ * @brief rename_project, renames the json project
+ * @param old_name, string of old json project name
+ * @param new_name, string of new json project name
+ */
 void rename_project(string old_name, string new_name)
 {
 	string oldfilename = old_name + ".json";
@@ -287,97 +223,4 @@ void rename_project(string old_name, string new_name)
     jsonfile1 << j1;
     jsonfile1.close();
     rename(oldfilename.c_str(), newfilename.c_str());
-}
-void change_project_description(string project_name, string new_description)
-{
-	json j1;
-	string filename = project_name + ".json";
-	ifstream jsonfile(filename);
-	jsonfile >> j1;
-	jsonfile.close();
-	j1["Project"]["Description"] = new_description;
-	
-	ofstream jsonfile1;
-	jsonfile1.open(filename);
-	jsonfile1 << j1;
-	jsonfile1.close();
-
-}
-
-//Task Change
-void change_task_name(Project& project, int task_number, string new_name)
-{
-	json j1;
-	string filename = project.get_name() + ".json";
-	ifstream jsonfile(filename);
-	jsonfile >> j1;
-	jsonfile.close();
-
-	string task_name = "task" + to_string(task_number);
-	j1["Tasks"][task_name]["Name"] = new_name;
-
-	ofstream jsonfile1;
-	jsonfile1.open(filename);
-	jsonfile1 << j1;
-	jsonfile1.close();
-}
-void change_task_due_date(Project& project, int task_number, QDate new_date)
-{
-	json j1;
-	string filename = project.get_name() + ".json";
-	ifstream jsonfile(filename);
-	jsonfile >> j1;
-	jsonfile.close();
-
-	string task_name = "task" + to_string(task_number);
-
-    int day = new_date.day();
-    int month = new_date.month();
-    int year = new_date.year();
-
-	j1["Tasks"][task_name]["Due Date"]["Day"]= day;
-	j1["Tasks"][task_name]["Due Date"]["Month"]= month;
-	j1["Tasks"][task_name]["Due Date"]["Year"]= year;
-
-	ofstream jsonfile1;
-	jsonfile1.open(filename);
-	jsonfile1 << j1;
-	jsonfile1.close();
-}
-void change_task_description(Project& project, int task_number, string new_description)
-{
-	json j1;
-	string filename = project.get_name() + ".json";
-	ifstream jsonfile(filename);
-	jsonfile >> j1;
-	jsonfile.close();
-
-	string task_name = "task" + to_string(task_number);
-
-	j1["Tasks"][task_name]["Description"] = new_description;
-
-	ofstream jsonfile1;
-	jsonfile1.open(filename);
-	jsonfile1 << j1;
-	jsonfile1.close();
-
-
-}
-void change_task_status(Project& project, int task_number, string new_status)
-{
-	json j1;
-	string filename = project.get_name() + ".json";
-	ifstream jsonfile(filename);
-	jsonfile >> j1;
-	jsonfile.close();
-
-	string task_name = "task" + to_string(task_number);
-
-	j1["Tasks"][task_name]["Status"] = new_status;
-
-    ofstream jsonfile1;
-    jsonfile1.open(filename);
-    jsonfile1 << j1;
-    jsonfile1.close();
-
 }

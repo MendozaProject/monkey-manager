@@ -2,7 +2,7 @@
 #include <QString>
 #include <string>
 #include <projectutils.h>
-#include "Json_utils.h"
+#include "json_utils.h"
 #include <QDebug>
 
 int ProjectListModel::rowCount(const QModelIndex& parent) const {
