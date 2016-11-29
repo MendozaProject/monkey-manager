@@ -16,10 +16,10 @@ TaskWidget::TaskWidget(QWidget *parent) :
     name = ui->name;
     date = ui->date;
 
-    temp_task = ProjectUtils::Instance()->get_open_task();
+    temp_task = ProjectUtils::instance()->get_open_task();
     name->setText(QString::fromStdString(temp_task.get_name()));
     date->setText(temp_task.get_due_date().toString("MM/dd/yyyy"));
-    widget_task_number =ProjectUtils::Instance()->get_open_project().get_current_ticket();
+    widget_task_number =ProjectUtils::instance()->get_open_project().get_current_ticket();
     qDebug() << "From TaskWidget Creation: " + QString::fromStdString(temp_task.get_name()) ;
 
 }
@@ -36,6 +36,6 @@ TaskWidget::~TaskWidget()
 void TaskWidget::mousePressEvent(QMouseEvent * event)
 {
     MainWindow::getInstance()->DisplayDetailedView(temp_task);
-    ProjectUtils::Instance()->open_task(temp_task);
-    ProjectUtils::Instance()->get_open_project().set_selected_ticket( temp_task.get_task_number() );
+    ProjectUtils::instance()->open_task(temp_task);
+    ProjectUtils::instance()->get_open_project().set_selected_ticket( temp_task.get_task_number() );
 }
