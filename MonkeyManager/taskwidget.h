@@ -1,3 +1,7 @@
+/*
+Displays the open task as a detailed view.
+*/
+
 #ifndef TASKWIDGET_H
 #define TASKWIDGET_H
 
