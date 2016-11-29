@@ -96,7 +96,7 @@ void MainWindow::onNewProjectButtonClick()
 {
     qDebug() << "Main Window New Project Button";
     Project newProject("New Project", "");
-    projectModel->addProject(newProject, Qt::EditRole);
+    projectModel->add_project(newProject, Qt::EditRole);
 }
 
 void MainWindow::onDeleteProjectButtonClick()
@@ -107,7 +107,7 @@ void MainWindow::onDeleteProjectButtonClick()
         return;
     ProjectUtils::Instance()->set_current_project_index(index.first().row());
     remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
-    projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
+    projectModel->delete_project(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
     projectListView->setCurrentIndex(projectModel->index(0,0));
     update_ui();
 }
