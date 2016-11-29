@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     taskDescriptionWidget = ui->taskDescriptionWidget;
     taskDescriptionWidget->hide();
-
+    update_ui();
     //Connections
     connect(newProjectButton, SIGNAL (released()), this, SLOT(onNewProjectButtonClick()));
     connect(deleteProjectButton, SIGNAL(released()), this, SLOT(onDeleteProjectButtonClick()));
