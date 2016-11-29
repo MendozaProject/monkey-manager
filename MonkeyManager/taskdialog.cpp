@@ -27,6 +27,11 @@ TaskDialog::~TaskDialog()
     delete ui;
 }
 
+/*
+*@brief Once the user presses "Ok" the following data will be taken as an input 
+*	for each task: Name, Due Date, Description, and Status.
+*/
+
 void TaskDialog::on_buttonBox_accepted()
 {
     //name, due date, description, status
@@ -49,6 +54,11 @@ void TaskDialog::on_buttonBox_accepted()
     MainWindow::getInstance()->onTaskDialogAccepted();
 }
 
+/*
+*@brief Returns the task with all the inputed data
+*
+*@param Task current task 
+*/
 Task TaskDialog::getTask(Task task)
 {
     return task;

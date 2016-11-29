@@ -1,3 +1,8 @@
+/*
+*@brief Once the user presses "Ok" the following data will be taken as an input 
+*	for each task: Name, Due Date, Description, and Status.
+*/
+
 #ifndef TASKDIALOG_H
 #define TASKDIALOG_H
 #pragma once
