@@ -20,7 +20,7 @@ SOURCES += main.cpp\
     taskwidget.cpp \
     taskdialog.cpp \
     projectlistmodel.cpp \
-    Json_utils.cpp
+    json_utils.cpp
 
 HEADERS  += mainwindow.h \
     project.h \
@@ -30,7 +30,7 @@ HEADERS  += mainwindow.h \
     taskwidget.h \
     taskdialog.h \
     projectlistmodel.h \
-    Json_utils.h
+    json_utils.h
 
 FORMS    += mainwindow.ui \
     taskwidget.ui \
