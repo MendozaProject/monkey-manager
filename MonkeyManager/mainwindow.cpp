@@ -105,8 +105,8 @@ void MainWindow::onDeleteProjectButtonClick()
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
     if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
-    remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
+    remove_json_project(ProjectUtils::instance()->get_projects().at(ProjectUtils::instance()->get_current_project_index()).get_name());
     projectModel->delete_project(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
     projectListView->setCurrentIndex(projectModel->index(0,0));
     update_ui();
