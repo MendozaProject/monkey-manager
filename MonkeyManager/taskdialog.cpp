@@ -12,7 +12,7 @@ TaskDialog::TaskDialog(QWidget *parent) :
     ui->setupUi(this);
 
     if( MainWindow::getInstance()->getEditFlag() )
-        m_task = ProjectUtils::Instance()->get_open_task();
+        m_task = ProjectUtils::instance()->get_open_task();
     else
         m_task = Task();
 
@@ -35,16 +35,16 @@ void TaskDialog::on_buttonBox_accepted()
     m_task.set_due_date(ui->dateEdit->date());
     m_task.set_status(ui->comboBox->currentText().toStdString());
 
-    if( MainWindow::getInstance()->getEditFlag() && !(ProjectUtils::Instance()->get_open_project().get_tasks().empty()) ) {
-        ProjectUtils::Instance()->get_open_project().editTask(ProjectUtils::Instance()->get_open_task().get_name(), m_task);
-        ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).editTask(ProjectUtils::Instance()->get_open_task().get_name(), m_task);
+    if( MainWindow::getInstance()->getEditFlag() && !(ProjectUtils::instance()->get_open_project().get_tasks().empty()) ) {
+        ProjectUtils::instance()->get_open_project().editTask(ProjectUtils::instance()->get_open_task().get_name(), m_task);
+        ProjectUtils::instance()->get_projects().at(ProjectUtils::instance()->get_current_project_index()).editTask(ProjectUtils::instance()->get_open_task().get_name(), m_task);
     }
     else {
-        ProjectUtils::Instance()->get_open_project().add_task(m_task);
-        ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).add_task(m_task);
+        ProjectUtils::instance()->get_open_project().add_task(m_task);
+        ProjectUtils::instance()->get_projects().at(ProjectUtils::instance()->get_current_project_index()).add_task(m_task);
     }
 
-    ProjectUtils::Instance()->open_task(m_task);
+    ProjectUtils::instance()->open_task(m_task);
 
     MainWindow::getInstance()->onTaskDialogAccepted();
 }
