@@ -1,12 +1,10 @@
 #include "projectlistmodel.h"
-<<<<<<< HEAD
 #include <QString>
 #include <string>
 #include <projectutils.h>
 #include "json_utils.h"
 #include <QDebug>
-=======
->>>>>>> testing
+
 
 int ProjectListModel::rowCount(const QModelIndex& parent) const {
     return (int)m_projects_list.size();
