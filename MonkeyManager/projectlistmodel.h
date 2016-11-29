@@ -1,11 +1,6 @@
 #ifndef PROJECTLISTMODEL_H
 #define PROJECTLISTMODEL_H
 #include <QAbstractListModel>
-#include <vector>
-#include <projectutils.h>
-#include <QString>
-#include <string>
-//#include <projectutils.h>
 #include "Json_utils.h"
 
 class ProjectListModel : public QAbstractListModel{
