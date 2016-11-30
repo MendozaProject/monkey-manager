@@ -19,15 +19,15 @@ MainWindow::MainWindow(QWidget *parent) :
     newProjectButton = ui->newProjectButton;
     deleteProjectButton= ui->deleteProjectButton;
 
-    ProjectUtils::Instance()->set_projects(load_all_projects());
-    if (ProjectUtils::Instance()->get_projects().empty()){
-        ProjectUtils::Instance()->add_project(Project());
+    ProjectUtils::instance()->set_projects(load_all_projects());
+    if (ProjectUtils::instance()->get_projects().empty()){
+        ProjectUtils::instance()->add_project(Project());
     }
-    ProjectUtils::Instance()->open_project(ProjectUtils::Instance()->get_projects()[0].get_name());
-    m_project = ProjectUtils::Instance()->get_open_project();
+    ProjectUtils::instance()->set_open_project(ProjectUtils::instance()->get_projects()[0].get_name());
+    m_project = ProjectUtils::instance()->get_open_project();
 
     projectListView = ui->projectsList;
-    projectModel = new ProjectListModel(ProjectUtils::Instance()->get_projects());
+    projectModel = new ProjectListModel(ProjectUtils::instance()->get_projects());
     projectListView->setModel(projectModel);
     projectListView->setCurrentIndex(projectModel->index(0,0));
 
@@ -105,16 +105,16 @@ void MainWindow::update_ui(){
     remove_all_widgets(doingLayout);
     remove_all_widgets(testingLayout);
     remove_all_widgets(doneLayout);
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
 
-    projectNameLabel->setText(QString::fromStdString(ProjectUtils::Instance()->get_open_project().get_name()));
+    projectNameLabel->setText(QString::fromStdString(ProjectUtils::instance()->get_open_project().get_name()));
     taskDescriptionWidget->hide();
 
-    vector<Task> tasks = ProjectUtils::Instance()->get_projects().at(index.first().row()).get_tasks();
+    vector<Task> tasks = ProjectUtils::instance()->get_projects().at(index.first().row()).get_tasks();
     if(!tasks.empty()) {
         for(uint8_t i = 0; i < tasks.size(); i++){
-            ProjectUtils::Instance()->open_task(tasks.at(i));
+            ProjectUtils::instance()->open_task(tasks.at(i));
             TaskWidget *task = new TaskWidget;
             if(tasks.at(i).get_status() == "To Do")
                 ui->Todo_List->addWidget(task);
@@ -166,7 +166,7 @@ void MainWindow::setEditFlag(bool f)
 void MainWindow::onTaskDialogAccepted()
 {
     TaskWidget *task = new TaskWidget;
-    Task current = ProjectUtils::Instance()->get_open_task();
+    Task current = ProjectUtils::instance()->get_open_task();
     if(current.get_status() == "To Do")
         ui->Todo_List->addWidget(task);
     else if(current.get_status() == "Doing")
@@ -185,7 +185,7 @@ void MainWindow::onTaskDialogAccepted()
 void MainWindow::onNewProjectButtonClick()
 {
     Project newProject("New Project", "");
-    projectModel->addProject(newProject, Qt::EditRole);
+    projectModel->add_project(newProject, Qt::EditRole);
 }
 
 /**
@@ -194,11 +194,11 @@ void MainWindow::onNewProjectButtonClick()
 void MainWindow::onDeleteProjectButtonClick()
 {
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
-    remove_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()).get_name());
-    projectModel->deleteProject(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
+    remove_json_project(ProjectUtils::instance()->get_projects().at(ProjectUtils::instance()->get_current_project_index()).get_name());
+    projectModel->delete_project(projectListView->selectionModel()->selectedIndexes().first(), Qt::EditRole);
     projectListView->setCurrentIndex(projectModel->index(0,0));
     update_ui();
 }
@@ -209,9 +209,9 @@ void MainWindow::onDeleteProjectButtonClick()
 void MainWindow::onNewTaskButtonClicked()
 {
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
     setEditFlag(false);
     taskDialog = new TaskDialog();
     taskDialog->show();
@@ -223,10 +223,10 @@ void MainWindow::onNewTaskButtonClicked()
 void MainWindow::onEditTaskButtonClicked()
 {
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
-    //ProjectUtils::Instance()->get_open_task();
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
+    //ProjectUtils::instance()->get_open_task();
     setEditFlag(true);
     taskDialog = new TaskDialog();
     taskDialog->show();
@@ -256,9 +256,9 @@ void MainWindow::remove_all_widgets(QBoxLayout* layout){
  */
 void MainWindow::on_saveProjectsButton_clicked()
 {
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    save_all_projects(ProjectUtils::Instance()->get_projects());
+    save_all_projects(ProjectUtils::instance()->get_projects());
 }
 
 /**
@@ -267,10 +267,10 @@ void MainWindow::on_saveProjectsButton_clicked()
 void MainWindow::on_saveCurrentProjectBotton_clicked()
 {
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
-    create_json_project(ProjectUtils::Instance()->get_projects().at(ProjectUtils::Instance()->get_current_project_index()));
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
+    create_json_project(ProjectUtils::instance()->get_projects().at(ProjectUtils::instance()->get_current_project_index()));
 }
 
 /**
@@ -286,12 +286,12 @@ void MainWindow::on_closeTaskInfoButton_clicked(){
 void MainWindow::onDeleteTaskButtonClicked()
 {
     QModelIndexList index = projectListView->selectionModel()->selectedIndexes();
-    if(ProjectUtils::Instance()->get_projects().empty())
+    if(ProjectUtils::instance()->get_projects().empty())
         return;
-    ProjectUtils::Instance()->set_current_project_index(index.first().row());
-    string temp_name = ProjectUtils::Instance()->get_open_task().get_name();
-    vector<Task>::iterator temp_index = ProjectUtils::Instance()->get_projects().at(index.first().row()).find_task_by_name(temp_name);
-    ProjectUtils::Instance()->get_projects().at(index.first().row()).remove_task(temp_index);
+    ProjectUtils::instance()->set_current_project_index(index.first().row());
+    string temp_name = ProjectUtils::instance()->get_open_task().get_name();
+    vector<Task>::iterator temp_index = ProjectUtils::instance()->get_projects().at(index.first().row()).find_task_by_name(temp_name);
+    ProjectUtils::instance()->get_projects().at(index.first().row()).remove_task(temp_index);
 
     update_ui();
 }
@@ -320,7 +320,4 @@ void MainWindow::load_fonts(){
     database.addApplicationFont(":/fonts/fonts/Roboto-Light.ttf");
     database.addApplicationFont(":/fonts/fonts/Roboto-Bold.ttf");
 }
-
-
-
 
