@@ -78,12 +78,11 @@ MainWindow::~MainWindow()
  */
 void MainWindow::centerAndResize()
 {
-    // get the dimension available on this screen
     QSize availableSize = qApp->desktop()->availableGeometry().size();
     int width = availableSize.width();
     int height = availableSize.height();
-    width *= 0.85; // 90% of the screen size
-    height *= 0.85; // 90% of the screen size
+    width *= 0.85;
+    height *= 0.85;
     QSize newSize( width, height );
 
     setGeometry(
@@ -226,7 +225,6 @@ void MainWindow::onEditTaskButtonClicked()
     if(ProjectUtils::instance()->get_projects().empty())
         return;
     ProjectUtils::instance()->set_current_project_index(index.first().row());
-    //ProjectUtils::instance()->get_open_task();
     setEditFlag(true);
     taskDialog = new TaskDialog();
     taskDialog->show();

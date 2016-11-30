@@ -2,7 +2,6 @@
 #define Json_utils_H
 #pragma once
 #include <QDate>
-#include <QDebug>
 #include <QFileInfo>
 #include <QDirIterator>
 #include "project.h"

@@ -8,6 +8,12 @@ Displays the open task as a detailed view.
 #include "task.h"
 #include <QWidget>
 #include <QLabel>
+#include "ui_taskwidget.h"
+#include "project.h"
+#include "projectutils.h"
+#include <QDesktopWidget>
+#include "mainwindow.h"
+
 
 namespace Ui {
 class TaskWidget;
